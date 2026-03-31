@@ -51,7 +51,7 @@ const AeronaveBaronB58 = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    redirectToWhatsApp("Aeronave Beechcraft Baron B58", "Aeronave Baron B58");
+    redirectToWhatsApp("Aeronave Beechcraft Baron B58", "Aeronave Baron B58", form);
   };
 
   const refSpecs = useScrollReveal();

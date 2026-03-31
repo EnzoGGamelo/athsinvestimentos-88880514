@@ -61,7 +61,7 @@ const Index = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const product = form.ativo || "Ativos em geral";
-    redirectToWhatsApp(product, "Home ATHS");
+    redirectToWhatsApp(product, "Home ATHS", form);
   };
 
   const refBadges = useScrollReveal();

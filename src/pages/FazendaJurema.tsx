@@ -77,7 +77,7 @@ const FazendaJurema = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    redirectToWhatsApp("Fazenda Jurema (Sapezal – MT)", "Fazenda Jurema");
+    redirectToWhatsApp("Fazenda Jurema (Sapezal – MT)", "Fazenda Jurema", form);
   };
 
   const refOverview = useScrollReveal();
