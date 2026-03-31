@@ -15,7 +15,7 @@ const LinksPage = () => (
       <h1 className="text-white text-xl font-sans font-semibold tracking-wide">ATHS Empreendimentos & Investimentos</h1>
       
       <a
-        href="https://wa.me/5547928380021"
+        href="https://wa.me/554792838021?text=Vim%20do%20Instagram%2C%20quero%20tirar%20d%C3%BAvidas!"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center justify-center gap-3 text-white/70 hover:text-gold transition-colors font-sans text-sm"

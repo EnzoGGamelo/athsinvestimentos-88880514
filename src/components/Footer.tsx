@@ -34,7 +34,7 @@ const Footer = () => (
             <li><span className="text-white/50">Endereço:</span> Rua Vila Lobos, 200 — Londrina/PR — CEP 86047-130</li>
             <li><span className="text-white/50">Contato:</span> Tatiane</li>
             <li><span className="text-white/50">E-mail:</span> camboriucatarina04@gmail.com</li>
-            <li className="flex items-center gap-2"><Phone size={14} /> (47) 9283-8021</li>
+            <li><a href="https://wa.me/554792838021?text=Vim%20do%20site%2C%20quero%20tirar%20d%C3%BAvidas!" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-gold transition-colors"><Phone size={14} /> (47) 9283-8021</a></li>
           </ul>
         </div>
       </div>
