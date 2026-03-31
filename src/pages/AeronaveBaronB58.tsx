@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import {
@@ -10,6 +11,7 @@ import {
   Plane, Gauge, Paintbrush, Clock, Cog, Navigation, ShieldCheck,
   Armchair, Activity, Wrench, CalendarCheck
 } from "lucide-react";
+import { redirectToWhatsApp } from "@/lib/whatsapp";
 
 import baronSide from "@/assets/baron-side.jpg";
 import baronFront from "@/assets/baron-front.jpg";
@@ -33,12 +35,22 @@ const faqItems = [
 ];
 
 const AeronaveBaronB58 = () => {
+  const [form, setForm] = useState({
+    nome: "", email: "", telefone: "",
+    finalidade: "", faixa: "", experiencia: "", prazo: "", contato: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    redirectToWhatsApp("Aeronave Beechcraft Baron B58", "Aeronave Baron B58");
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
       {/* Hero */}
-      <section className="bg-navy relative overflow-hidden">
+      <section className="bg-navy navy-texture relative overflow-hidden">
         <div className="absolute inset-0">
           <img src={baronSide} alt="" className="w-full h-full object-cover opacity-20" />
         </div>
@@ -78,7 +90,7 @@ const AeronaveBaronB58 = () => {
       </section>
 
       {/* Resumo técnico */}
-      <section className="bg-card py-20 lg:py-28">
+      <section id="resumo" className="bg-card py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8">
           <h2 className="text-3xl md:text-4xl text-foreground mb-12 text-center">Resumo técnico</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
@@ -97,7 +109,6 @@ const AeronaveBaronB58 = () => {
         <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
           <h2 className="text-3xl md:text-4xl text-foreground mb-12 text-center">Motorização e hélices</h2>
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Esquerdo */}
             <div className="bg-card rounded-xl border border-border p-8">
               <h3 className="font-sans font-semibold text-foreground text-lg mb-6 flex items-center gap-2">
                 <Cog size={20} className="text-primary" /> Lado esquerdo
@@ -115,7 +126,6 @@ const AeronaveBaronB58 = () => {
                 </div>
               </div>
             </div>
-            {/* Direito */}
             <div className="bg-card rounded-xl border border-border p-8">
               <h3 className="font-sans font-semibold text-foreground text-lg mb-6 flex items-center gap-2">
                 <Cog size={20} className="text-primary" /> Lado direito
@@ -166,7 +176,7 @@ const AeronaveBaronB58 = () => {
       </section>
 
       {/* Condição e valor percebido */}
-      <section className="bg-navy py-20 lg:py-28">
+      <section className="bg-navy navy-texture py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center">
           <Paintbrush size={48} className="text-gold mx-auto mb-6" />
           <h2 className="text-3xl md:text-4xl text-white mb-6">Condição e valor percebido</h2>
@@ -193,7 +203,7 @@ const AeronaveBaronB58 = () => {
       </section>
 
       {/* FAQ */}
-      <section className="bg-card py-20 lg:py-28">
+      <section id="faq" className="bg-card py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
           <h2 className="text-3xl md:text-4xl text-foreground mb-12 text-center">Perguntas Frequentes</h2>
           <Accordion type="single" collapsible className="space-y-3">
@@ -216,38 +226,38 @@ const AeronaveBaronB58 = () => {
         <div className="container mx-auto px-4 lg:px-8 max-w-2xl">
           <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Fale com um consultor especializado</h2>
           <p className="text-muted-foreground text-center mb-12 font-sans">Preencha o formulário para iniciar a conversa sobre a Baron B58.</p>
-          <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
-            <input type="text" placeholder="Nome completo" className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-            <input type="email" placeholder="E-mail" className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-            <input type="tel" placeholder="Telefone / WhatsApp" className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-            <select className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+          <form className="space-y-5" onSubmit={handleSubmit}>
+            <input type="text" placeholder="Nome completo" required value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+            <input type="email" placeholder="E-mail" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+            <input type="tel" placeholder="Telefone / WhatsApp" required value={form.telefone} onChange={(e) => setForm({ ...form, telefone: e.target.value })} className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+            <select value={form.finalidade} onChange={(e) => setForm({ ...form, finalidade: e.target.value })} className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
               <option value="">Você busca a aeronave para...</option>
               <option>Uso próprio</option>
               <option>Operação</option>
               <option>Investimento</option>
               <option>Revenda</option>
             </select>
-            <select className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+            <select value={form.faixa} onChange={(e) => setForm({ ...form, faixa: e.target.value })} className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
               <option value="">Faixa de investimento prevista</option>
               <option>Até R$ 2.000.000</option>
               <option>R$ 2.000.000 a R$ 5.000.000</option>
               <option>R$ 5.000.000 a R$ 10.000.000</option>
               <option>Acima de R$ 10.000.000</option>
             </select>
-            <select className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+            <select value={form.experiencia} onChange={(e) => setForm({ ...form, experiencia: e.target.value })} className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
               <option value="">Experiência com compra ou operação de aeronaves?</option>
               <option>Sim, já adquiri aeronaves</option>
               <option>Sim, opero aeronaves</option>
               <option>Não, primeira aquisição</option>
             </select>
-            <select className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+            <select value={form.prazo} onChange={(e) => setForm({ ...form, prazo: e.target.value })} className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
               <option value="">Em quanto tempo pretende avançar?</option>
               <option>Imediatamente</option>
               <option>Em até 30 dias</option>
               <option>Em até 90 dias</option>
               <option>Sem prazo definido</option>
             </select>
-            <select className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+            <select value={form.contato} onChange={(e) => setForm({ ...form, contato: e.target.value })} className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
               <option value="">Prefere receber contato por...</option>
               <option>Consultor comercial</option>
               <option>Ligação técnica</option>
