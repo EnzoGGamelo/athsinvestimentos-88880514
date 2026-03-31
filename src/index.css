@@ -135,4 +135,24 @@
       ),
       radial-gradient(circle at 50% 50%, hsla(213, 50%, 18%, 1) 0%, hsla(213, 50%, 10%, 1) 100%);
   }
+
+  /* Scroll reveal animations */
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .reveal-item.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Fade in for hero */
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 }
