@@ -217,17 +217,47 @@ const FazendaJurema = () => {
       {/* Formulário 1 */}
       <FormularioFazenda id="formulario" />
 
+      {/* Vista aérea com delimitação */}
+      <section className="bg-off-white py-20 lg:py-28">
+        <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
+          <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Delimitação e área da propriedade</h2>
+          <p className="text-muted-foreground text-center mb-10 font-sans">Imagem aérea com contorno destacando a área total de 3.050 ha da Fazenda Jurema em Sapezal – MT.</p>
+          <img
+            src={fazendaMapa}
+            alt="Mapa aéreo com delimitação da Fazenda Jurema – 3.050 ha"
+            className="rounded-xl w-full object-contain max-h-[500px] mx-auto cursor-pointer border-2 border-primary/20 hover:border-primary/50 transition-colors"
+            onClick={() => setLightboxIndex(galleryImages.findIndex(g => g.src === fazendaMapa) >= 0 ? galleryImages.findIndex(g => g.src === fazendaMapa) : 0)}
+          />
+          <p className="text-xs text-muted-foreground text-center mt-3 font-sans">Clique para ampliar • Contorno em vermelho indica os limites da propriedade</p>
+        </div>
+      </section>
+
       {/* Galeria de fotos */}
-      <section id="fotos" className="bg-off-white py-20 lg:py-28">
+      <section id="fotos" className="bg-card py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8">
           <h2 className="text-3xl md:text-4xl text-foreground mb-12 text-center">Imagens da propriedade</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-            {[fazendaCampo, fazendaCasa, fazendaBarracao, fazendaEstrada, fazendaContainer, fazendaGaragem].map((img, i) => (
-              <img key={i} src={img} alt={`Fazenda Jurema - Imagem ${i + 1}`} className="rounded-xl w-full h-56 object-cover" loading="lazy" />
+            {galleryImages.map((img, i) => (
+              <img
+                key={i}
+                src={img.src}
+                alt={img.alt}
+                className="rounded-xl w-full h-56 object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                loading="lazy"
+                onClick={() => setLightboxIndex(i)}
+              />
             ))}
           </div>
         </div>
       </section>
+
+      {lightboxIndex !== null && (
+        <ImageLightbox
+          images={galleryImages}
+          currentIndex={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+        />
+      )}
 
       {/* Benfeitorias */}
       <section id="benfeitorias" className="bg-card py-20 lg:py-28">
