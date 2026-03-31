@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ImageLightbox from "@/components/ImageLightbox";
 import {
   Accordion,
   AccordionContent,
@@ -19,6 +20,12 @@ import fazendaBarracao from "@/assets/fazenda-barracao.jpg";
 import fazendaEstrada from "@/assets/fazenda-estrada.jpg";
 import fazendaContainer from "@/assets/fazenda-container.jpg";
 import fazendaGaragem from "@/assets/fazenda-garagem.jpg";
+import fazendaBarracaoNew from "@/assets/fazenda-barracao-new.jpg";
+import fazendaCasa1 from "@/assets/fazenda-casa-1.jpg";
+import fazendaCasa2 from "@/assets/fazenda-casa-2.jpg";
+import fazendaMapa from "@/assets/fazenda-mapa.jpg";
+import fazendaTerra from "@/assets/fazenda-terra.jpg";
+import fazendaAerea from "@/assets/fazenda-aerea.jpg";
 
 const overviewItems = [
   { icon: MapPin, label: "Localização", value: "Sapezal, MT" },
