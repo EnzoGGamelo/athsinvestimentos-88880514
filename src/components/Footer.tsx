@@ -1,0 +1,52 @@
+import { Link } from "react-router-dom";
+import { Instagram, Linkedin, Mail, Phone } from "lucide-react";
+import logo from "@/assets/aths-logo.png";
+
+const Footer = () => (
+  <footer className="bg-navy text-white/70">
+    <div className="container mx-auto px-4 lg:px-8 py-16">
+      <div className="grid md:grid-cols-3 gap-12">
+        {/* Brand */}
+        <div>
+          <img src={logo} alt="ATHS" className="h-16 w-auto mb-4" />
+          <p className="text-sm leading-relaxed">
+            Intermediação de ativos de alto valor com segurança documental, transparência e atendimento consultivo.
+          </p>
+          <div className="flex gap-4 mt-6">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors"><Linkedin size={20} /></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors"><Instagram size={20} /></a>
+            <a href="mailto:contato@athsinvestimentos.com.br" className="hover:text-gold transition-colors"><Mail size={20} /></a>
+          </div>
+        </div>
+
+        {/* Links */}
+        <div>
+          <h4 className="font-sans text-sm font-semibold text-white tracking-wider uppercase mb-4">Navegação</h4>
+          <ul className="space-y-2 text-sm">
+            <li><Link to="/" className="hover:text-gold transition-colors">Home</Link></li>
+            <li><Link to="/fazenda-jurema" className="hover:text-gold transition-colors">Fazenda Jurema</Link></li>
+            <li><Link to="/aeronave-baronb58" className="hover:text-gold transition-colors">Aeronave Baron B58</Link></li>
+          </ul>
+        </div>
+
+        {/* Info */}
+        <div>
+          <h4 className="font-sans text-sm font-semibold text-white tracking-wider uppercase mb-4">Dados Institucionais</h4>
+          <ul className="space-y-2 text-sm">
+            <li><span className="text-white/50">Razão Social:</span> ATHS Empreendimentos e Investimentos LTDA</li>
+            <li><span className="text-white/50">CNPJ:</span> 00.000.000/0001-00</li>
+            <li><span className="text-white/50">Endereço:</span> Editar endereço aqui</li>
+            <li className="flex items-center gap-2"><Phone size={14} /> (00) 00000-0000</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="gold-line mt-12 mb-6" />
+      <p className="text-center text-xs text-white/40">
+        © {new Date().getFullYear()} ATHS Empreendimentos & Investimentos. Todos os direitos reservados.
+      </p>
+    </div>
+  </footer>
+);
+
+export default Footer;
