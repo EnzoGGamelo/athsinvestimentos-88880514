@@ -119,6 +119,7 @@ const galleryImages = [
   { src: fazendaBarracaoNew, alt: "Barracão da Fazenda Jurema" },
   { src: fazendaTerra, alt: "Terreno da Fazenda Jurema" },
   { src: fazendaAerea, alt: "Vista aérea da Fazenda Jurema" },
+  { src: fazendaMapa, alt: "Mapa aéreo com delimitação da propriedade" },
   { src: fazendaCasa1, alt: "Casa principal da Fazenda Jurema" },
   { src: fazendaCasa2, alt: "Segunda casa da Fazenda Jurema" },
   { src: fazendaCampo, alt: "Campo da Fazenda Jurema" },
