@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import {
@@ -10,6 +11,7 @@ import {
   MapPin, DollarSign, Ruler, Sprout, Mountain, Droplets, Zap,
   Home as HomeIcon, Building, Container, Warehouse, ShieldCheck, CalendarCheck
 } from "lucide-react";
+import { redirectToWhatsApp } from "@/lib/whatsapp";
 
 import fazendaCampo from "@/assets/fazenda-campo.jpg";
 import fazendaCasa from "@/assets/fazenda-casa.jpg";
@@ -45,54 +47,66 @@ const faqItems = [
   { q: "É possível realizar visita presencial ou técnica?", a: "Sim. As visitas presenciais e técnicas são realizadas mediante agendamento prévio com a equipe comercial da ATHS, garantindo organização e discrição." },
 ];
 
-const FormularioFazenda = ({ id }: { id?: string }) => (
-  <section id={id} className="bg-card py-20 lg:py-28 border-t border-border">
-    <div className="container mx-auto px-4 lg:px-8 max-w-2xl">
-      <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Fale com um especialista</h2>
-      <p className="text-muted-foreground text-center mb-12 font-sans">Preencha o formulário para iniciar a conversa sobre a Fazenda Jurema.</p>
-      <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
-        <input type="text" placeholder="Nome completo" className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-        <input type="email" placeholder="E-mail" className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-        <input type="tel" placeholder="Telefone / WhatsApp" className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-        <select className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-          <option value="">Você busca a propriedade para...</option>
-          <option>Operação agrícola</option>
-          <option>Investimento patrimonial</option>
-          <option>Expansão de portfólio</option>
-          <option>Outro</option>
-        </select>
-        <select className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-          <option value="">Faixa de investimento estimada</option>
-          <option>Até R$ 10.000.000</option>
-          <option>R$ 10.000.000 a R$ 30.000.000</option>
-          <option>R$ 30.000.000 a R$ 50.000.000</option>
-          <option>Acima de R$ 50.000.000</option>
-        </select>
-        <select className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-          <option value="">Pretende comprar como...</option>
-          <option>Pessoa física</option>
-          <option>Pessoa jurídica</option>
-          <option>Grupo investidor</option>
-        </select>
-        <select className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-          <option value="">Em quanto tempo pretende avançar?</option>
-          <option>Imediatamente</option>
-          <option>Em até 30 dias</option>
-          <option>Em até 90 dias</option>
-          <option>Sem prazo definido</option>
-        </select>
-        <select className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-          <option value="">Já adquiriu propriedade rural acima de R$ 10 milhões?</option>
-          <option>Sim</option>
-          <option>Não</option>
-        </select>
-        <button type="submit" className="w-full bg-primary text-primary-foreground py-3.5 rounded-md font-sans font-semibold hover:bg-primary/90 transition-colors">
-          Enviar e falar com especialista em imóveis rurais
-        </button>
-      </form>
-    </div>
-  </section>
-);
+const FormularioFazenda = ({ id }: { id?: string }) => {
+  const [form, setForm] = useState({
+    nome: "", email: "", telefone: "",
+    finalidade: "", faixa: "", tipo: "", prazo: "", experiencia: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    redirectToWhatsApp("Fazenda Jurema (Sapezal – MT)", "Fazenda Jurema");
+  };
+
+  return (
+    <section id={id} className="bg-card py-20 lg:py-28 border-t border-border">
+      <div className="container mx-auto px-4 lg:px-8 max-w-2xl">
+        <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Fale com um especialista</h2>
+        <p className="text-muted-foreground text-center mb-12 font-sans">Preencha o formulário para iniciar a conversa sobre a Fazenda Jurema.</p>
+        <form className="space-y-5" onSubmit={handleSubmit}>
+          <input type="text" placeholder="Nome completo" required value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+          <input type="email" placeholder="E-mail" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+          <input type="tel" placeholder="Telefone / WhatsApp" required value={form.telefone} onChange={(e) => setForm({ ...form, telefone: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+          <select required value={form.finalidade} onChange={(e) => setForm({ ...form, finalidade: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+            <option value="">Você busca a propriedade para...</option>
+            <option>Operação agrícola</option>
+            <option>Investimento patrimonial</option>
+            <option>Expansão de portfólio</option>
+            <option>Outro</option>
+          </select>
+          <select value={form.faixa} onChange={(e) => setForm({ ...form, faixa: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+            <option value="">Faixa de investimento estimada</option>
+            <option>Até R$ 10.000.000</option>
+            <option>R$ 10.000.000 a R$ 30.000.000</option>
+            <option>R$ 30.000.000 a R$ 50.000.000</option>
+            <option>Acima de R$ 50.000.000</option>
+          </select>
+          <select value={form.tipo} onChange={(e) => setForm({ ...form, tipo: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+            <option value="">Pretende comprar como...</option>
+            <option>Pessoa física</option>
+            <option>Pessoa jurídica</option>
+            <option>Grupo investidor</option>
+          </select>
+          <select value={form.prazo} onChange={(e) => setForm({ ...form, prazo: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+            <option value="">Em quanto tempo pretende avançar?</option>
+            <option>Imediatamente</option>
+            <option>Em até 30 dias</option>
+            <option>Em até 90 dias</option>
+            <option>Sem prazo definido</option>
+          </select>
+          <select value={form.experiencia} onChange={(e) => setForm({ ...form, experiencia: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+            <option value="">Já adquiriu propriedade rural acima de R$ 10 milhões?</option>
+            <option>Sim</option>
+            <option>Não</option>
+          </select>
+          <button type="submit" className="w-full bg-primary text-primary-foreground py-3.5 rounded-md font-sans font-semibold hover:bg-primary/90 transition-colors">
+            Enviar e falar com especialista em imóveis rurais
+          </button>
+        </form>
+      </div>
+    </section>
+  );
+};
 
 const FazendaJurema = () => {
   return (
@@ -100,7 +114,7 @@ const FazendaJurema = () => {
       <Header />
 
       {/* Hero */}
-      <section className="bg-navy relative overflow-hidden">
+      <section className="bg-navy navy-texture relative overflow-hidden">
         <div className="absolute inset-0">
           <img src={fazendaEstrada} alt="" className="w-full h-full object-cover opacity-20" />
         </div>
@@ -128,7 +142,7 @@ const FazendaJurema = () => {
       </section>
 
       {/* Visão geral */}
-      <section className="bg-off-white py-20 lg:py-28">
+      <section id="visao-geral" className="bg-off-white py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8">
           <h2 className="text-3xl md:text-4xl text-foreground mb-12 text-center">Visão geral do ativo</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
@@ -146,7 +160,7 @@ const FazendaJurema = () => {
       </section>
 
       {/* Potencial produtivo */}
-      <section className="bg-card py-20 lg:py-28">
+      <section id="potencial" className="bg-card py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
           <h2 className="text-3xl md:text-4xl text-foreground mb-8 text-center">Potencial produtivo</h2>
           <div className="gold-line w-16 mx-auto mb-12" />
@@ -182,7 +196,7 @@ const FazendaJurema = () => {
       <FormularioFazenda id="formulario" />
 
       {/* Galeria de fotos */}
-      <section className="bg-off-white py-20 lg:py-28">
+      <section id="fotos" className="bg-off-white py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8">
           <h2 className="text-3xl md:text-4xl text-foreground mb-12 text-center">Imagens da propriedade</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
@@ -194,7 +208,7 @@ const FazendaJurema = () => {
       </section>
 
       {/* Benfeitorias */}
-      <section className="bg-card py-20 lg:py-28">
+      <section id="benfeitorias" className="bg-card py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
           <h2 className="text-3xl md:text-4xl text-foreground mb-12 text-center">Benfeitorias</h2>
           <div className="space-y-4">
@@ -209,7 +223,7 @@ const FazendaJurema = () => {
       </section>
 
       {/* Segurança documental */}
-      <section className="bg-navy py-20 lg:py-28">
+      <section className="bg-navy navy-texture py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center">
           <ShieldCheck size={48} className="text-gold mx-auto mb-6" />
           <h2 className="text-3xl md:text-4xl text-white mb-6">Segurança documental e negociação</h2>
@@ -238,7 +252,7 @@ const FazendaJurema = () => {
       </section>
 
       {/* FAQ */}
-      <section className="bg-card py-20 lg:py-28">
+      <section id="faq" className="bg-card py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
           <h2 className="text-3xl md:text-4xl text-foreground mb-12 text-center">Perguntas Frequentes</h2>
           <Accordion type="single" collapsible className="space-y-3">

@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Shield, FileCheck, Users, CalendarCheck, Handshake,
   Truck, Trees, Plane, Home, Castle,
   CheckCircle, Search, ClipboardCheck, Eye, ShieldCheck,
-  Linkedin, Instagram
+  Instagram
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -13,6 +14,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { redirectToWhatsApp } from "@/lib/whatsapp";
 
 import baronImg from "@/assets/baron-side.jpg";
 import fazendaImg from "@/assets/fazenda-campo.jpg";
@@ -49,12 +51,23 @@ const faqItems = [
 ];
 
 const Index = () => {
+  const [form, setForm] = useState({
+    nome: "", email: "", telefone: "",
+    ativo: "", faixa: "", finalidade: "", prazo: "", atendimento: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const product = form.ativo || "Ativos em geral";
+    redirectToWhatsApp(product, "Home ATHS");
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
       {/* Hero */}
-      <section className="bg-navy relative overflow-hidden">
+      <section className="bg-navy navy-texture relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-secondary/90 via-navy to-navy" />
         <div className="container mx-auto px-4 lg:px-8 py-24 lg:py-36 relative z-10">
           <div className="max-w-3xl">
@@ -86,8 +99,7 @@ const Index = () => {
               <p className="text-sm text-muted-foreground font-sans">ATHS Empreendimentos e Investimentos LTDA</p>
             </div>
             <div className="flex gap-4">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors"><Linkedin size={20} /></a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors"><Instagram size={20} /></a>
+              <a href="https://www.instagram.com/athsempreendimentos/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors"><Instagram size={20} /></a>
             </div>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -102,7 +114,7 @@ const Index = () => {
       </section>
 
       {/* Quem Somos */}
-      <section className="bg-off-white py-20 lg:py-28">
+      <section id="quem-somos" className="bg-off-white py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
           <h2 className="text-3xl md:text-4xl text-foreground mb-8 text-center">Quem somos</h2>
           <div className="gold-line w-16 mx-auto mb-8" />
@@ -113,7 +125,7 @@ const Index = () => {
       </section>
 
       {/* Atuação */}
-      <section className="bg-card py-20 lg:py-28">
+      <section id="atuacao" className="bg-card py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8">
           <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Atuação da ATHS</h2>
           <p className="text-muted-foreground text-center mb-12 font-sans max-w-2xl mx-auto">Curadoria patrimonial em categorias selecionadas de ativos de alto valor.</p>
@@ -150,12 +162,11 @@ const Index = () => {
       </section>
 
       {/* Oportunidades em destaque */}
-      <section id="destaques" className="bg-navy py-20 lg:py-28">
+      <section id="destaques" className="bg-navy navy-texture py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8">
           <h2 className="text-3xl md:text-4xl text-white mb-4 text-center">Oportunidades em destaque</h2>
           <div className="gold-line w-16 mx-auto mb-12" />
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Fazenda */}
             <div className="bg-white/5 backdrop-blur rounded-xl overflow-hidden border border-white/10 hover:border-gold/30 transition-colors">
               <img src={fazendaImg} alt="Fazenda Jurema – Sapezal, MT" className="w-full h-56 object-cover" />
               <div className="p-6">
@@ -166,7 +177,6 @@ const Index = () => {
                 </Link>
               </div>
             </div>
-            {/* Aeronave */}
             <div className="bg-white/5 backdrop-blur rounded-xl overflow-hidden border border-white/10 hover:border-gold/30 transition-colors">
               <img src={baronImg} alt="Beechcraft Baron B58" className="w-full h-56 object-cover" />
               <div className="p-6">
@@ -182,7 +192,7 @@ const Index = () => {
       </section>
 
       {/* FAQ */}
-      <section className="bg-off-white py-20 lg:py-28">
+      <section id="faq" className="bg-off-white py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
           <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Perguntas Frequentes</h2>
           <div className="gold-line w-16 mx-auto mb-12" />
@@ -206,12 +216,12 @@ const Index = () => {
         <div className="container mx-auto px-4 lg:px-8 max-w-2xl">
           <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Fale com um consultor</h2>
           <p className="text-muted-foreground text-center mb-12 font-sans">Preencha o formulário abaixo para iniciar seu atendimento consultivo.</p>
-          <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
-            <input type="text" placeholder="Nome completo" className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-            <input type="email" placeholder="E-mail" className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-            <input type="tel" placeholder="Telefone / WhatsApp" className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+          <form className="space-y-5" onSubmit={handleSubmit}>
+            <input type="text" placeholder="Nome completo" required value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+            <input type="email" placeholder="E-mail" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+            <input type="tel" placeholder="Telefone / WhatsApp" required value={form.telefone} onChange={(e) => setForm({ ...form, telefone: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
 
-            <select className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+            <select required value={form.ativo} onChange={(e) => setForm({ ...form, ativo: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
               <option value="">Qual ativo é do seu interesse?</option>
               <option>Caminhões</option>
               <option>Fazendas</option>
@@ -221,7 +231,7 @@ const Index = () => {
               <option>Outros</option>
             </select>
 
-            <select className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+            <select value={form.faixa} onChange={(e) => setForm({ ...form, faixa: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
               <option value="">Faixa de investimento disponível</option>
               <option>Até R$ 500.000</option>
               <option>R$ 500.000 a R$ 2.000.000</option>
@@ -230,7 +240,7 @@ const Index = () => {
               <option>Acima de R$ 50.000.000</option>
             </select>
 
-            <select className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+            <select value={form.finalidade} onChange={(e) => setForm({ ...form, finalidade: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
               <option value="">A compra será para uso, patrimônio ou investimento?</option>
               <option>Uso próprio</option>
               <option>Patrimônio</option>
@@ -238,7 +248,7 @@ const Index = () => {
               <option>Outro</option>
             </select>
 
-            <select className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+            <select value={form.prazo} onChange={(e) => setForm({ ...form, prazo: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
               <option value="">Em quanto tempo pretende avançar na negociação?</option>
               <option>Imediatamente</option>
               <option>Em até 30 dias</option>
@@ -246,7 +256,7 @@ const Index = () => {
               <option>Sem prazo definido</option>
             </select>
 
-            <select className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+            <select value={form.atendimento} onChange={(e) => setForm({ ...form, atendimento: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
               <option value="">Prefere atendimento por WhatsApp, ligação ou e-mail?</option>
               <option>WhatsApp</option>
               <option>Ligação</option>

@@ -114,4 +114,25 @@
     background: linear-gradient(90deg, transparent, hsl(var(--gold)), transparent);
     height: 1px;
   }
+
+  .navy-texture {
+    background-image:
+      radial-gradient(ellipse at 30% 20%, hsla(195, 55%, 28%, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 80%, hsla(195, 55%, 28%, 0.1) 0%, transparent 50%),
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 20px,
+        hsla(213, 50%, 20%, 0.08) 20px,
+        hsla(213, 50%, 20%, 0.08) 21px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 20px,
+        hsla(213, 50%, 20%, 0.08) 20px,
+        hsla(213, 50%, 20%, 0.08) 21px
+      ),
+      radial-gradient(circle at 50% 50%, hsla(213, 50%, 18%, 1) 0%, hsla(213, 50%, 10%, 1) 100%);
+  }
 }
