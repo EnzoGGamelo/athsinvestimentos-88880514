@@ -115,7 +115,22 @@ const FormularioFazenda = ({ id }: { id?: string }) => {
   );
 };
 
+const galleryImages = [
+  { src: fazendaBarracaoNew, alt: "Barracão da Fazenda Jurema" },
+  { src: fazendaTerra, alt: "Terreno da Fazenda Jurema" },
+  { src: fazendaAerea, alt: "Vista aérea da Fazenda Jurema" },
+  { src: fazendaCasa1, alt: "Casa principal da Fazenda Jurema" },
+  { src: fazendaCasa2, alt: "Segunda casa da Fazenda Jurema" },
+  { src: fazendaCampo, alt: "Campo da Fazenda Jurema" },
+  { src: fazendaBarracao, alt: "Estrutura da Fazenda Jurema" },
+  { src: fazendaEstrada, alt: "Acesso à Fazenda Jurema" },
+  { src: fazendaContainer, alt: "Containers de apoio" },
+  { src: fazendaGaragem, alt: "Garagem da Fazenda Jurema" },
+];
+
 const FazendaJurema = () => {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
