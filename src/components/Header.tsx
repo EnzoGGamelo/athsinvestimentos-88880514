@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import logo from "@/assets/aths-logo.png";
 
 const navItems = [
-  { label: "Home", path: "/" },
+  { label: "Aths Investimentos", path: "/" },
   { label: "Fazenda Jurema", path: "/fazenda-jurema" },
   { label: "Baron B58", path: "/aeronave-baronb58" },
 ];
@@ -28,9 +28,7 @@ const Header = () => {
                 key={item.path}
                 to={item.path}
                 className={`text-sm font-medium tracking-wide transition-colors ${
-                  location.pathname === item.path
-                    ? "text-gold"
-                    : "text-white/80 hover:text-gold"
+                  location.pathname === item.path ? "text-gold" : "text-white/80 hover:text-gold"
                 }`}
               >
                 {item.label}
@@ -54,10 +52,7 @@ const Header = () => {
       {/* Mobile overlay menu */}
       {open && (
         <>
-          <div
-            className="fixed inset-0 z-[55] bg-black/60 backdrop-blur-sm md:hidden"
-            onClick={() => setOpen(false)}
-          />
+          <div className="fixed inset-0 z-[55] bg-black/60 backdrop-blur-sm md:hidden" onClick={() => setOpen(false)} />
           <nav className="fixed top-0 left-0 right-0 z-[58] bg-navy/95 backdrop-blur-md md:hidden px-6 pt-20 pb-8 space-y-4 animate-fade-in">
             {navItems.map((item) => (
               <Link
