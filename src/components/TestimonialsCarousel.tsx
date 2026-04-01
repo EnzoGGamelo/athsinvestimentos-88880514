@@ -17,7 +17,7 @@ const testimonials = [
     initials: "MT",
   },
   {
-    text: "Fechei a compra de uma fazenda produtiva em Mato Grosso com a ATHS e o diferencial foi claro: eles já chegaram com o ativo selecionado, documentado e pronto para visita técnica. Para quem investe no agro, esse nível de segurança faz toda a diferença na tomada de decisão.",
+    text: "Cheguei até a Aths por indicação de um sócio e, honestamente, não sabia bem o que esperar. A propriedade que fechamos em Mato Grosso era exatamente o que eu procurava há quase dois anos. Documentação organizada, atendimento sem aquela pressão de vendedor — foi uma negociação adulta do começo ao fim.",
     name: "Augusto Henrique Moraes",
     role: "Produtor Rural e Investidor | Soja e Pecuária",
     city: "Cuiabá, MT",
