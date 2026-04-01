@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { redirectToWhatsApp } from "@/lib/whatsapp";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import FloatingCTA from "@/components/FloatingCTA";
 
 import baronSide from "@/assets/baron-side.jpg";
 import baronFront from "@/assets/baron-front.jpg";
