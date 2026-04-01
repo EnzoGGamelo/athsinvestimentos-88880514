@@ -12,29 +12,71 @@ const Footer = () => (
             Intermediação de ativos de alto valor com segurança documental, transparência e atendimento consultivo.
           </p>
           <div className="flex gap-4 mt-6">
-            <a href="https://www.instagram.com/athsempreendimentos/" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors"><Instagram size={20} /></a>
-            <a href="mailto:camboriucatarina04@gmail.com" className="hover:text-gold transition-colors"><Mail size={20} /></a>
+            <a
+              href="https://www.instagram.com/athsempreendimentos/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gold transition-colors"
+            >
+              <Instagram size={20} />
+            </a>
+            <a href="mailto:camboriucatarina04@gmail.com" className="hover:text-gold transition-colors">
+              <Mail size={20} />
+            </a>
           </div>
         </div>
 
         <div>
           <h4 className="font-sans text-sm font-semibold text-white tracking-wider uppercase mb-4">Navegação</h4>
           <ul className="space-y-2 text-sm">
-            <li><Link to="/" className="hover:text-gold transition-colors">Aths Investimentos</Link></li>
-            <li><Link to="/fazenda-jurema" className="hover:text-gold transition-colors">Fazenda Jurema</Link></li>
-            <li><Link to="/aeronave-baronb58" className="hover:text-gold transition-colors">Aeronave Baron B58</Link></li>
+            <li>
+              <Link to="/" className="hover:text-gold transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/fazenda-jurema" className="hover:text-gold transition-colors">
+                Fazenda Jurema
+              </Link>
+            </li>
+            <li>
+              <Link to="/aeronave-baronb58" className="hover:text-gold transition-colors">
+                Aeronave Baron B58
+              </Link>
+            </li>
           </ul>
         </div>
 
         <div>
-          <h4 className="font-sans text-sm font-semibold text-white tracking-wider uppercase mb-4">Dados Institucionais</h4>
+          <h4 className="font-sans text-sm font-semibold text-white tracking-wider uppercase mb-4">
+            Dados Institucionais
+          </h4>
           <ul className="space-y-2 text-sm">
-            <li><span className="text-white/50">Razão Social:</span> ATHS Empreendimentos e Investimentos LTDA</li>
-            <li><span className="text-white/50">CNPJ:</span> 00.000.000/0001-00</li>
-            <li><span className="text-white/50">Endereço:</span> Rua Vila Lobos, 200 — Londrina/PR — CEP 86047-130</li>
-            <li><span className="text-white/50">Contato:</span> Tatiane</li>
-            <li><span className="text-white/50">E-mail:</span> camboriucatarina04@gmail.com</li>
-            <li><a href="https://wa.me/554792838021?text=Vim%20do%20site%2C%20quero%20tirar%20d%C3%BAvidas!" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-gold transition-colors"><Phone size={14} /> (47) 9283-8021</a></li>
+            <li>
+              <span className="text-white/50">Razão Social:</span> ATHS Empreendimentos e Investimentos LTDA
+            </li>
+            <li>
+              <span className="text-white/50">CNPJ:</span> 00.000.000/0001-00
+            </li>
+            <li>
+              <span className="text-white/50">Endereço:</span> Rua Vila Lobos, 200 — Londrina/PR — CEP 86047-130
+            </li>
+            <li>
+              <span className="text-white/50">Contato:</span> Tatiane
+            </li>
+            <li>
+              <span className="text-white/50">E-mail:</span> camboriucatarina04@gmail.com
+            </li>
+            <li>
+              <a
+                href="https://wa.me/5547992838021?text=Vim%20do%20site%2C%20quero%20tirar%20d%C3%BAvidas!"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-gold transition-colors"
+              >
+                <Phone size={14} /> (47) 9283-8021
+              </a>
+            </li>
           </ul>
         </div>
       </div>
