@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/accordion";
 import { redirectToWhatsApp } from "@/lib/whatsapp";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import FloatingCTA from "@/components/FloatingCTA";
 
 import baronImg from "@/assets/baron-side.jpg";
 import fazendaImg from "@/assets/fazenda-campo.jpg";
@@ -54,8 +55,8 @@ const faqItems = [
 
 const Index = () => {
   const [form, setForm] = useState({
-    nome: "", email: "", telefone: "",
-    ativo: "", faixa: "", finalidade: "", prazo: "", atendimento: "",
+    nome: "", telefone: "",
+    ativo: "", faixa: "", finalidade: "", prazo: "", contato: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -222,7 +223,6 @@ const Index = () => {
           <p className="text-muted-foreground text-center mb-12 font-sans">Preencha o formulário para iniciar seu atendimento consultivo.</p>
           <form className="space-y-5" onSubmit={handleSubmit}>
             <input type="text" placeholder="Nome completo" required value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-shadow" />
-            <input type="email" placeholder="E-mail" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-shadow" />
             <input type="tel" placeholder="Telefone / WhatsApp" required value={form.telefone} onChange={(e) => setForm({ ...form, telefone: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-shadow" />
 
             <select required value={form.ativo} onChange={(e) => setForm({ ...form, ativo: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
@@ -260,11 +260,10 @@ const Index = () => {
               <option>Sem prazo definido</option>
             </select>
 
-            <select value={form.atendimento} onChange={(e) => setForm({ ...form, atendimento: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Prefere atendimento por WhatsApp, ligação ou e-mail?</option>
-              <option>WhatsApp</option>
+            <select value={form.contato} onChange={(e) => setForm({ ...form, contato: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+              <option value="">Prefere receber contato por...</option>
               <option>Ligação</option>
-              <option>E-mail</option>
+              <option>WhatsApp</option>
             </select>
 
             <button type="submit" className="w-full bg-primary text-primary-foreground py-3.5 rounded-md font-sans font-semibold hover:bg-primary/90 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
@@ -274,6 +273,7 @@ const Index = () => {
         </div>
       </section>
 
+      <FloatingCTA />
       <Footer />
     </div>
   );
