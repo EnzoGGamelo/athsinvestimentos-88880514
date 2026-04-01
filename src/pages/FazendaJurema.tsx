@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { redirectToWhatsApp } from "@/lib/whatsapp";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import FloatingCTA from "@/components/FloatingCTA";
 
 import fazendaCampo from "@/assets/fazenda-campo.jpg";
 import fazendaCasa from "@/assets/fazenda-casa.jpg";
