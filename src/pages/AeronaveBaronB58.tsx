@@ -55,7 +55,7 @@ const allImages = [
 const AeronaveBaronB58 = () => {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [form, setForm] = useState({
-    nome: "", email: "", telefone: "",
+    nome: "", telefone: "",
     finalidade: "", faixa: "", experiencia: "", prazo: "", contato: "",
   });
 
