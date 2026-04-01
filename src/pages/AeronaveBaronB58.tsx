@@ -386,6 +386,7 @@ const AeronaveBaronB58 = () => {
         </div>
       </section>
 
+      <FloatingCTA />
       <Footer />
     </div>
   );
