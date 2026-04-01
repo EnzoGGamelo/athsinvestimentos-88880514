@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/accordion";
 import { redirectToWhatsApp } from "@/lib/whatsapp";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import FloatingCTA from "@/components/FloatingCTA";
 
 import baronImg from "@/assets/baron-side.jpg";
 import fazendaImg from "@/assets/fazenda-campo.jpg";
