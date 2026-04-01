@@ -260,11 +260,10 @@ const Index = () => {
               <option>Sem prazo definido</option>
             </select>
 
-            <select value={form.atendimento} onChange={(e) => setForm({ ...form, atendimento: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Prefere atendimento por WhatsApp, ligação ou e-mail?</option>
-              <option>WhatsApp</option>
+            <select value={form.contato} onChange={(e) => setForm({ ...form, contato: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+              <option value="">Prefere receber contato por...</option>
               <option>Ligação</option>
-              <option>E-mail</option>
+              <option>WhatsApp</option>
             </select>
 
             <button type="submit" className="w-full bg-primary text-primary-foreground py-3.5 rounded-md font-sans font-semibold hover:bg-primary/90 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
