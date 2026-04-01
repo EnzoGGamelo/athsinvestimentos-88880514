@@ -71,8 +71,8 @@ const galleryImages = [
 const FazendaJurema = () => {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [form, setForm] = useState({
-    nome: "", email: "", telefone: "",
-    finalidade: "", faixa: "", tipo: "", prazo: "", experiencia: "",
+    nome: "", telefone: "",
+    finalidade: "", faixa: "", tipo: "", prazo: "", experiencia: "", contato: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
