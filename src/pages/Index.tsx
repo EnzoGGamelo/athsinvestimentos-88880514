@@ -54,8 +54,8 @@ const faqItems = [
 
 const Index = () => {
   const [form, setForm] = useState({
-    nome: "", email: "", telefone: "",
-    ativo: "", faixa: "", finalidade: "", prazo: "", atendimento: "",
+    nome: "", telefone: "",
+    ativo: "", faixa: "", finalidade: "", prazo: "", contato: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
