@@ -305,6 +305,7 @@ const FazendaJurema = () => {
         </div>
       </section>
 
+      <FloatingCTA />
       <Footer />
     </div>
   );
