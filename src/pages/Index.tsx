@@ -275,6 +275,7 @@ const Index = () => {
         </div>
       </section>
 
+      <FloatingCTA />
       <Footer />
     </div>
   );

@@ -13,17 +13,31 @@ export function openWhatsAppInstagram() {
 export function redirectToWhatsApp(
   productInterest: string,
   pageName: string,
-  formData?: { nome?: string; email?: string; telefone?: string; finalidade?: string }
+  formData?: Record<string, string>
 ) {
   let message = `Preenchi o formulário do site, quero tirar dúvidas!\n\n`;
   message += `📋 *Produto de interesse:* ${productInterest}\n`;
   message += `📄 *Página:* ${pageName}\n`;
 
   if (formData) {
-    if (formData.nome) message += `👤 *Nome:* ${formData.nome}\n`;
-    if (formData.email) message += `📧 *E-mail:* ${formData.email}\n`;
-    if (formData.telefone) message += `📱 *Telefone:* ${formData.telefone}\n`;
-    if (formData.finalidade) message += `🎯 *Finalidade:* ${formData.finalidade}\n`;
+    const labels: Record<string, string> = {
+      nome: "👤 Nome",
+      telefone: "📱 Telefone",
+      ativo: "🏷️ Ativo",
+      finalidade: "🎯 Finalidade",
+      faixa: "💰 Faixa de investimento",
+      prazo: "📅 Prazo",
+      contato: "📞 Prefere contato por",
+      experiencia: "🔍 Experiência",
+      tipo: "🏢 Tipo de compra",
+      atendimento: "📞 Prefere contato por",
+    };
+    for (const [key, value] of Object.entries(formData)) {
+      if (value && key !== "email") {
+        const label = labels[key] || key;
+        message += `${label}: ${value}\n`;
+      }
+    }
   }
 
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
