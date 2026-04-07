@@ -140,46 +140,27 @@ const FazendaJurema = () => {
         </div>
       </section>
 
-      {/* Potencial produtivo */}
-      <section id="potencial" className="bg-card py-20 lg:py-28">
-        <div ref={refPotencial} className="container mx-auto px-4 lg:px-8 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl text-foreground mb-8 text-center">Potencial produtivo</h2>
-          <div className="gold-line w-16 mx-auto mb-12" />
-          <div className="grid sm:grid-cols-2 gap-6 mb-10">
-            {[
-              { icon: Mountain, title: "Teor de argila: 15 a 20", desc: "Solo com boa capacidade para cultivo agrícola." },
-              { icon: Mountain, title: "Altitude: 300 m", desc: "Condição favorável para diversas culturas." },
-              { icon: MapPin, title: "Acesso o ano todo", desc: "Logística facilitada em qualquer estação." },
-              { icon: Droplets, title: "Rio Sapezal na divisa", desc: "Recurso hídrico natural no limite da propriedade." },
-            ].map((item, i) => (
-              <div key={item.title} className="reveal-item bg-muted rounded-xl p-6 hover:shadow-md transition-all duration-300" style={{ transitionDelay: `${i * 100}ms` }}>
-                <item.icon size={24} className="text-primary mb-3" />
-                <p className="font-sans font-semibold text-foreground mb-1">{item.title}</p>
-                <p className="text-sm text-muted-foreground font-sans">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
+
 
       {/* Mapa aéreo com delimitação */}
       <section className="bg-off-white py-20 lg:py-28">
         <div ref={refMapa} className="container mx-auto px-4 lg:px-8 max-w-6xl reveal-item">
           <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Delimitação e área da propriedade</h2>
           <div className="gold-line w-16 mx-auto mb-12" />
-          <div className="grid lg:grid-cols-2 gap-8 items-start">
-            {/* Coluna 1 — Imagem aérea */}
+          <div className="grid lg:grid-cols-[40%_60%] gap-8 items-start">
+            {/* Coluna 1 — Imagem aérea rotacionada */}
             <div>
               <img
                 src={fazendaMapa}
                 alt="Mapa aéreo com delimitação da Fazenda Jurema – 3.050 ha"
-                className="rounded-xl w-full object-contain cursor-pointer border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-xl"
+                className="rounded-xl w-full object-contain cursor-pointer border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-xl -rotate-90"
                 onClick={() => setLightboxIndex(galleryImages.length)}
               />
               <p className="text-xs text-muted-foreground text-center mt-3 font-sans">Clique para ampliar • Contorno indica os limites da propriedade</p>
             </div>
 
-            {/* Coluna 2 — Informações + Maps */}
+            {/* Coluna 2 — Dados + Potencial + Maps */}
             <div className="space-y-6">
               <div className="bg-card rounded-xl p-6 border border-border space-y-4">
                 <h3 className="text-xl font-semibold text-foreground font-sans">Dados da propriedade</h3>
@@ -207,6 +188,27 @@ const FazendaJurema = () => {
                 </ul>
               </div>
 
+              {/* Potencial produtivo integrado */}
+              <div className="bg-card rounded-xl p-6 border border-border space-y-4">
+                <h3 className="text-xl font-semibold text-foreground font-sans">Potencial produtivo</h3>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {[
+                    { icon: Mountain, title: "Teor de argila: 15 a 20", desc: "Solo com boa capacidade para cultivo agrícola." },
+                    { icon: Mountain, title: "Altitude: 300 m", desc: "Condição favorável para diversas culturas." },
+                    { icon: MapPin, title: "Acesso o ano todo", desc: "Logística facilitada em qualquer estação." },
+                    { icon: Droplets, title: "Rio Sapezal na divisa", desc: "Recurso hídrico natural no limite da propriedade." },
+                  ].map((item) => (
+                    <div key={item.title} className="flex items-start gap-3 p-3 bg-muted rounded-lg">
+                      <item.icon size={18} className="text-primary shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-sans font-semibold text-foreground text-sm">{item.title}</p>
+                        <p className="text-xs text-muted-foreground font-sans">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {/* Google Maps embed */}
               <div className="rounded-xl overflow-hidden border border-border shadow-md">
                 <iframe
@@ -225,7 +227,7 @@ const FazendaJurema = () => {
                   rel="noopener noreferrer"
                   className="block text-center py-3 bg-card text-primary text-sm font-sans font-medium hover:underline"
                 >
-                  Abrir no Google Maps →
+                  Abrir no Maps ↗
                 </a>
               </div>
             </div>
