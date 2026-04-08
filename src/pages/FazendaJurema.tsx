@@ -142,59 +142,72 @@ const FazendaJurema = () => {
 
 
 
-
-      {/* Mapa aéreo com delimitação */}
-      {/* Mapa aéreo com delimitação */}
-      <section className="relative py-20 lg:py-28 overflow-hidden">
-        {/* Background image */}
-        <div className="absolute inset-0">
-          <img
-            src={fazendaMapa}
-            alt=""
-            className="w-full h-full object-cover -rotate-90 scale-150 opacity-20"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/70 to-background/90" />
-        </div>
-
-        <div ref={refMapa} className="container mx-auto px-4 lg:px-8 max-w-5xl reveal-item relative z-10">
+      {/* Delimitação e área da propriedade */}
+      <section className="bg-off-white py-20 lg:py-28">
+        <div ref={refMapa} className="container mx-auto px-4 lg:px-8 max-w-6xl reveal-item">
           <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Delimitação e área da propriedade</h2>
-          <div className="gold-line w-16 mx-auto mb-10" />
+          <div className="gold-line w-16 mx-auto mb-12" />
 
-          <p className="text-center text-muted-foreground font-sans max-w-2xl mx-auto mb-10">
-            Clique na imagem para ampliar e visualizar o contorno da propriedade com 3.050 hectares em Sapezal – MT.
-          </p>
+          {/* Two-column layout: map left, data right */}
+          <div className="flex flex-col lg:flex-row gap-10 items-start mb-10">
 
-          {/* Clickable image centered */}
-          <div className="flex justify-center mb-12">
-            <img
-              src={fazendaMapa}
-              alt="Mapa aéreo com delimitação da Fazenda Jurema – 3.050 ha"
-              className="rounded-xl max-w-md w-full object-contain cursor-pointer border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl -rotate-90"
-              onClick={() => setLightboxIndex(galleryImages.length)}
-            />
-          </div>
+            {/* Left column: map image + caption */}
+            <div className="flex flex-col items-center lg:w-1/2 w-full">
+              <img
+                src={fazendaMapa}
+                alt="Mapa aéreo com delimitação da Fazenda Jurema – 3.050 ha"
+                className="rounded-xl w-full object-cover cursor-pointer border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl"
+                style={{ maxHeight: "420px" }}
+                onClick={() => setLightboxIndex(galleryImages.length)}
+              />
+              <p className="text-center text-muted-foreground font-sans text-sm mt-3 max-w-sm">
+                Clique na imagem para ampliar e visualizar o contorno da propriedade com 3.050 hectares em Sapezal – MT.
+              </p>
+            </div>
 
-          {/* Potencial produtivo */}
-          <div className="bg-card/80 backdrop-blur-sm rounded-xl p-8 border border-border space-y-5 max-w-4xl mx-auto">
-            <h3 className="text-xl font-semibold text-foreground font-sans text-center">Potencial produtivo</h3>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {[
-                { icon: Mountain, title: "Teor de argila: 15 a 20", desc: "Solo com boa capacidade para cultivo agrícola." },
-                { icon: Mountain, title: "Altitude: 300 m", desc: "Condição favorável para diversas culturas." },
-                { icon: MapPin, title: "Acesso o ano todo", desc: "Logística facilitada em qualquer estação." },
-                { icon: Droplets, title: "Rio Sapezal na divisa", desc: "Recurso hídrico natural no limite da propriedade." },
-              ].map((item) => (
-                <div key={item.title} className="flex flex-col items-center text-center gap-2 p-4 bg-muted/60 rounded-lg">
-                  <item.icon size={22} className="text-primary" />
-                  <p className="font-sans font-semibold text-foreground text-sm">{item.title}</p>
-                  <p className="text-xs text-muted-foreground font-sans">{item.desc}</p>
+            {/* Right column: property data + Potencial produtivo */}
+            <div className="flex flex-col gap-6 lg:w-1/2 w-full">
+              {/* Property data card */}
+              <div className="bg-card rounded-xl p-6 border border-border">
+                <h3 className="text-lg font-semibold text-foreground font-sans mb-4">Dados da propriedade</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {overviewItems.map((item) => (
+                    <div key={item.label} className="flex items-start gap-3">
+                      <item.icon size={20} className="text-primary shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-xs text-muted-foreground font-sans">{item.label}</p>
+                        <p className="font-semibold font-sans text-foreground text-sm">{item.value}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              {/* Potencial produtivo card */}
+              <div className="bg-card rounded-xl p-6 border border-border">
+                <h3 className="text-lg font-semibold text-foreground font-sans mb-4">Potencial produtivo</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {[
+                    { icon: Mountain, title: "Teor de argila: 15 a 20", desc: "Solo com boa capacidade para cultivo agrícola." },
+                    { icon: Mountain, title: "Altitude: 300 m", desc: "Condição favorável para diversas culturas." },
+                    { icon: MapPin, title: "Acesso o ano todo", desc: "Logística facilitada em qualquer estação." },
+                    { icon: Droplets, title: "Rio Sapezal na divisa", desc: "Recurso hídrico natural no limite da propriedade." },
+                  ].map((item) => (
+                    <div key={item.title} className="flex items-start gap-3 p-3 bg-muted/60 rounded-lg">
+                      <item.icon size={20} className="text-primary shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-sans font-semibold text-foreground text-sm">{item.title}</p>
+                        <p className="text-xs text-muted-foreground font-sans">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Google Maps */}
-          <div className="rounded-xl overflow-hidden border border-border shadow-md max-w-4xl mx-auto mt-8">
+          {/* Google Maps — full width below columns */}
+          <div className="rounded-xl overflow-hidden border border-border shadow-md">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15000!2d-58.8!3d-13.5!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDMwJzAwLjAiUyA1OMKwNDgnMDAuMCJX!5e0!3m2!1spt-BR!2sbr"
               width="100%"
