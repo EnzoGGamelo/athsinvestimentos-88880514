@@ -25,7 +25,7 @@ import fazendaGaragem from "@/assets/fazenda-garagem.jpg";
 import fazendaBarracaoNew from "@/assets/fazenda-barracao-new.jpg";
 import fazendaCasa1 from "@/assets/fazenda-casa-1.jpg";
 import fazendaCasa2 from "@/assets/fazenda-casa-2.jpg";
-import fazendaMapa from "@/assets/fazenda-mapa.jpg";
+import mapaReal from "@/assets/MAPAREAL.png";
 import fazendaTerra from "@/assets/fazenda-terra.jpg";
 import fazendaAerea from "@/assets/fazenda-aerea.jpg";
 
@@ -149,15 +149,13 @@ const FazendaJurema = () => {
           <div className="gold-line w-16 mx-auto mb-12" />
 
           {/* Two-column layout: map left, data right */}
-          <div className="flex flex-col lg:flex-row gap-10 items-start mb-10">
+          <div className="flex flex-col lg:flex-row gap-10 items-stretch mb-10">
 
-            {/* Left column: map image + caption */}
             <div className="flex flex-col items-center lg:w-1/2 w-full">
               <img
-                src={fazendaMapa}
+                src={mapaReal}
                 alt="Mapa aéreo com delimitação da Fazenda Jurema – 3.050 ha"
-                className="rounded-xl w-full object-cover cursor-pointer border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl"
-                style={{ maxHeight: "420px" }}
+                className="rounded-xl w-full h-[600px] object-cover cursor-pointer border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl"
                 onClick={() => setLightboxIndex(galleryImages.length)}
               />
               <p className="text-center text-muted-foreground font-sans text-sm mt-3 max-w-sm">
@@ -165,39 +163,23 @@ const FazendaJurema = () => {
               </p>
             </div>
 
-            {/* Right column: property data + Potencial produtivo */}
-            <div className="flex flex-col gap-6 lg:w-1/2 w-full">
-              {/* Property data card */}
-              <div className="bg-card rounded-xl p-6 border border-border">
-                <h3 className="text-lg font-semibold text-foreground font-sans mb-4">Dados da propriedade</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {overviewItems.map((item) => (
-                    <div key={item.label} className="flex items-start gap-3">
-                      <item.icon size={20} className="text-primary shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-xs text-muted-foreground font-sans">{item.label}</p>
-                        <p className="font-semibold font-sans text-foreground text-sm">{item.value}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
+              {/* Right column: property data + Potencial produtivo */}
+            <div className="flex flex-col lg:w-1/2 w-full">
               {/* Potencial produtivo card */}
-              <div className="bg-card rounded-xl p-6 border border-border">
-                <h3 className="text-lg font-semibold text-foreground font-sans mb-4">Potencial produtivo</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="bg-card rounded-xl p-8 border border-border h-full flex flex-col justify-center">
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground font-sans mb-8">Potencial produtivo</h3>
+                <div className="flex flex-col gap-6">
                   {[
                     { icon: Mountain, title: "Teor de argila: 15 a 20", desc: "Solo com boa capacidade para cultivo agrícola." },
                     { icon: Mountain, title: "Altitude: 300 m", desc: "Condição favorável para diversas culturas." },
                     { icon: MapPin, title: "Acesso o ano todo", desc: "Logística facilitada em qualquer estação." },
                     { icon: Droplets, title: "Rio Sapezal na divisa", desc: "Recurso hídrico natural no limite da propriedade." },
                   ].map((item) => (
-                    <div key={item.title} className="flex items-start gap-3 p-3 bg-muted/60 rounded-lg">
-                      <item.icon size={20} className="text-primary shrink-0 mt-0.5" />
+                    <div key={item.title} className="flex items-start gap-4 p-4 bg-muted/60 rounded-xl hover:bg-muted/80 transition-colors">
+                      <item.icon size={26} className="text-primary shrink-0 mt-1" />
                       <div>
-                        <p className="font-sans font-semibold text-foreground text-sm">{item.title}</p>
-                        <p className="text-xs text-muted-foreground font-sans">{item.desc}</p>
+                        <p className="font-sans font-semibold text-foreground text-base">{item.title}</p>
+                        <p className="text-sm text-muted-foreground font-sans mt-1">{item.desc}</p>
                       </div>
                     </div>
                   ))}
@@ -252,7 +234,7 @@ const FazendaJurema = () => {
 
       {lightboxIndex !== null && (
         <ImageLightbox
-          images={[...galleryImages, { src: fazendaMapa, alt: "Mapa aéreo da Fazenda Jurema" }]}
+          images={[...galleryImages, { src: mapaReal, alt: "Mapa aéreo da Fazenda Jurema" }]}
           currentIndex={lightboxIndex}
           onClose={() => setLightboxIndex(null)}
         />
