@@ -144,93 +144,75 @@ const FazendaJurema = () => {
 
 
       {/* Mapa aéreo com delimitação */}
-      <section className="bg-off-white py-20 lg:py-28">
-        <div ref={refMapa} className="container mx-auto px-4 lg:px-8 max-w-6xl reveal-item">
+      {/* Mapa aéreo com delimitação */}
+      <section className="relative py-20 lg:py-28 overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <img
+            src={fazendaMapa}
+            alt=""
+            className="w-full h-full object-cover -rotate-90 scale-150 opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/70 to-background/90" />
+        </div>
+
+        <div ref={refMapa} className="container mx-auto px-4 lg:px-8 max-w-5xl reveal-item relative z-10">
           <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Delimitação e área da propriedade</h2>
-          <div className="gold-line w-16 mx-auto mb-12" />
-          <div className="grid lg:grid-cols-[40%_60%] gap-8 items-start">
-            {/* Coluna 1 — Imagem aérea rotacionada */}
-            <div>
-              <img
-                src={fazendaMapa}
-                alt="Mapa aéreo com delimitação da Fazenda Jurema – 3.050 ha"
-                className="rounded-xl w-full object-contain cursor-pointer border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-xl -rotate-90"
-                onClick={() => setLightboxIndex(galleryImages.length)}
-              />
-              <p className="text-xs text-muted-foreground text-center mt-3 font-sans">Clique para ampliar • Contorno indica os limites da propriedade</p>
-            </div>
+          <div className="gold-line w-16 mx-auto mb-10" />
 
-            {/* Coluna 2 — Dados + Potencial + Maps */}
-            <div className="space-y-6">
-              <div className="bg-card rounded-xl p-6 border border-border space-y-4">
-                <h3 className="text-xl font-semibold text-foreground font-sans">Dados da propriedade</h3>
-                <ul className="space-y-3 font-sans text-sm text-muted-foreground">
-                  <li className="flex items-start gap-3">
-                    <Ruler size={18} className="text-primary shrink-0 mt-0.5" />
-                    <span><strong className="text-foreground">Área total:</strong> 3.050 hectares</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Sprout size={18} className="text-primary shrink-0 mt-0.5" />
-                    <span><strong className="text-foreground">Lavoura aberta:</strong> 500 ha prontos para plantio</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Sprout size={18} className="text-primary shrink-0 mt-0.5" />
-                    <span><strong className="text-foreground">Em preparo:</strong> 300 ha + 600 ha de potencial de abertura</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Droplets size={18} className="text-primary shrink-0 mt-0.5" />
-                    <span><strong className="text-foreground">Rio Sapezal</strong> na divisa da propriedade</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
-                    <span><strong className="text-foreground">Pista para aeronaves</strong> — acesso direto por via aérea</span>
-                  </li>
-                </ul>
-              </div>
+          <p className="text-center text-muted-foreground font-sans max-w-2xl mx-auto mb-10">
+            Clique na imagem para ampliar e visualizar o contorno da propriedade com 3.050 hectares em Sapezal – MT.
+          </p>
 
-              {/* Potencial produtivo integrado */}
-              <div className="bg-card rounded-xl p-6 border border-border space-y-4">
-                <h3 className="text-xl font-semibold text-foreground font-sans">Potencial produtivo</h3>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {[
-                    { icon: Mountain, title: "Teor de argila: 15 a 20", desc: "Solo com boa capacidade para cultivo agrícola." },
-                    { icon: Mountain, title: "Altitude: 300 m", desc: "Condição favorável para diversas culturas." },
-                    { icon: MapPin, title: "Acesso o ano todo", desc: "Logística facilitada em qualquer estação." },
-                    { icon: Droplets, title: "Rio Sapezal na divisa", desc: "Recurso hídrico natural no limite da propriedade." },
-                  ].map((item) => (
-                    <div key={item.title} className="flex items-start gap-3 p-3 bg-muted rounded-lg">
-                      <item.icon size={18} className="text-primary shrink-0 mt-0.5" />
-                      <div>
-                        <p className="font-sans font-semibold text-foreground text-sm">{item.title}</p>
-                        <p className="text-xs text-muted-foreground font-sans">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
+          {/* Clickable image centered */}
+          <div className="flex justify-center mb-12">
+            <img
+              src={fazendaMapa}
+              alt="Mapa aéreo com delimitação da Fazenda Jurema – 3.050 ha"
+              className="rounded-xl max-w-md w-full object-contain cursor-pointer border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl -rotate-90"
+              onClick={() => setLightboxIndex(galleryImages.length)}
+            />
+          </div>
+
+          {/* Potencial produtivo */}
+          <div className="bg-card/80 backdrop-blur-sm rounded-xl p-8 border border-border space-y-5 max-w-4xl mx-auto">
+            <h3 className="text-xl font-semibold text-foreground font-sans text-center">Potencial produtivo</h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { icon: Mountain, title: "Teor de argila: 15 a 20", desc: "Solo com boa capacidade para cultivo agrícola." },
+                { icon: Mountain, title: "Altitude: 300 m", desc: "Condição favorável para diversas culturas." },
+                { icon: MapPin, title: "Acesso o ano todo", desc: "Logística facilitada em qualquer estação." },
+                { icon: Droplets, title: "Rio Sapezal na divisa", desc: "Recurso hídrico natural no limite da propriedade." },
+              ].map((item) => (
+                <div key={item.title} className="flex flex-col items-center text-center gap-2 p-4 bg-muted/60 rounded-lg">
+                  <item.icon size={22} className="text-primary" />
+                  <p className="font-sans font-semibold text-foreground text-sm">{item.title}</p>
+                  <p className="text-xs text-muted-foreground font-sans">{item.desc}</p>
                 </div>
-              </div>
-
-              {/* Google Maps embed */}
-              <div className="rounded-xl overflow-hidden border border-border shadow-md">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15000!2d-58.8!3d-13.5!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDMwJzAwLjAiUyA1OMKwNDgnMDAuMCJX!5e0!3m2!1spt-BR!2sbr"
-                  width="100%"
-                  height="220"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Localização Fazenda Jurema – Sapezal, MT"
-                />
-                <a
-                  href="https://maps.app.goo.gl/Ryi8trC7n4ezVNqKA"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-center py-3 bg-card text-primary text-sm font-sans font-medium hover:underline"
-                >
-                  Abrir no Maps ↗
-                </a>
-              </div>
+              ))}
             </div>
+          </div>
+
+          {/* Google Maps */}
+          <div className="rounded-xl overflow-hidden border border-border shadow-md max-w-4xl mx-auto mt-8">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15000!2d-58.8!3d-13.5!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDMwJzAwLjAiUyA1OMKwNDgnMDAuMCJX!5e0!3m2!1spt-BR!2sbr"
+              width="100%"
+              height="220"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Localização Fazenda Jurema – Sapezal, MT"
+            />
+            <a
+              href="https://maps.app.goo.gl/Ryi8trC7n4ezVNqKA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-center py-3 bg-card text-primary text-sm font-sans font-medium hover:underline"
+            >
+              Abrir no Maps ↗
+            </a>
           </div>
         </div>
       </section>
