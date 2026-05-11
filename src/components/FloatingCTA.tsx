@@ -1,12 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MessageCircle } from "lucide-react";
 
-const phrases = [
-  "Fale Com Um Consultor Agora",
-  "Tire Suas Dúvidas Agora",
-  "Atendimento Consultivo",
-  "Negociação Segura",
-];
+const phrases = ["Fale com consultor", "Atendimento direto", "Tire suas dúvidas"];
 
 const FloatingCTA = () => {
   const [phraseIndex, setPhraseIndex] = useState(0);
@@ -18,23 +13,20 @@ const FloatingCTA = () => {
       setTimeout(() => {
         setPhraseIndex((prev) => (prev + 1) % phrases.length);
         setVisible(true);
-      }, 300);
-    }, 5000);
+      }, 250);
+    }, 4200);
+
     return () => clearInterval(interval);
   }, []);
 
   return (
     <a
-      href="#formulario"
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-full px-5 py-3.5 font-sans font-semibold text-white shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-3xl"
-      style={{ background: "linear-gradient(135deg, #128C7E, #075E54, #1DA1F2)" }}
+      href="/#formulario"
+      className="fixed bottom-4 right-4 z-50 inline-flex items-center gap-3 rounded-md border border-white/20 bg-emerald-900 p-3 text-sm font-bold text-white shadow-2xl shadow-slate-950/25 transition hover:-translate-y-0.5 hover:bg-emerald-800 sm:bottom-5 sm:right-5 sm:px-4"
+      aria-label="Falar com consultor"
     >
-      <MessageCircle size={22} className="shrink-0 animate-pulse" />
-      <span
-        className={`text-sm whitespace-nowrap transition-all duration-300 ${
-          visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"
-        }`}
-      >
+      <MessageCircle size={20} className="shrink-0" />
+      <span className={`hidden whitespace-nowrap transition duration-200 sm:inline ${visible ? "opacity-100" : "opacity-0"}`}>
         {phrases[phraseIndex]}
       </span>
     </a>

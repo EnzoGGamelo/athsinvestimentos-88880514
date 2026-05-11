@@ -155,4 +155,124 @@
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  .motion-kenburns {
+    animation: motionKenburns 16s ease-out forwards;
+  }
+
+  .motion-reveal-up {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: motionRevealUp 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  .motion-delay-1 {
+    animation-delay: 120ms;
+  }
+
+  .motion-delay-2 {
+    animation-delay: 240ms;
+  }
+
+  .motion-delay-3 {
+    animation-delay: 360ms;
+  }
+
+  .motion-delay-4 {
+    animation-delay: 480ms;
+  }
+
+  .motion-float-slow {
+    animation: motionFloatSlow 6s ease-in-out infinite;
+  }
+
+  .asset-marquee {
+    width: max-content;
+    animation: assetMarquee 26s linear infinite;
+  }
+
+  .motion-card {
+    transform-style: preserve-3d;
+    transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease, background-color 260ms ease;
+  }
+
+  .motion-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .spotlight-sweep {
+    position: relative;
+  }
+
+  .spotlight-sweep::after {
+    content: "";
+    position: absolute;
+    inset: -40% auto -40% -60%;
+    width: 45%;
+    transform: skewX(-18deg);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+    animation: spotlightSweep 3.8s ease-in-out infinite;
+  }
+
+  @keyframes motionKenburns {
+    from {
+      transform: scale(1.02) translate3d(0, 0, 0);
+      filter: saturate(0.95) contrast(1.04);
+    }
+    to {
+      transform: scale(1.12) translate3d(-1.8%, -1.2%, 0);
+      filter: saturate(1.08) contrast(1.08);
+    }
+  }
+
+  @keyframes motionRevealUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes motionFloatSlow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes assetMarquee {
+    0%, 100% {
+      opacity: 0.72;
+      filter: saturate(0.9);
+    }
+    50% {
+      opacity: 1;
+      filter: saturate(1.18);
+    }
+  }
+
+  @keyframes spotlightSweep {
+    0%, 44% {
+      left: -60%;
+    }
+    64%, 100% {
+      left: 125%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motion-kenburns,
+    .motion-reveal-up,
+    .motion-float-slow,
+    .asset-marquee,
+    .spotlight-sweep::after {
+      animation: none;
+    }
+
+    .motion-reveal-up {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }

@@ -1,13 +1,25 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Shield, FileCheck, Users, CalendarCheck, Handshake,
-  Truck, Trees, Plane, Home, Castle,
-  CheckCircle, Search, ClipboardCheck, Eye, ShieldCheck,
-  Instagram
+  ArrowRight,
+  BadgeCheck,
+  CalendarCheck,
+  CheckCircle2,
+  ClipboardCheck,
+  Eye,
+  FileCheck2,
+  Landmark,
+  Plane,
+  Search,
+  ShieldCheck,
+  Sparkles,
+  Trees,
+  Truck,
 } from "lucide-react";
-import Header from "@/components/Header";
+
+import FloatingCTA from "@/components/FloatingCTA";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import {
   Accordion,
@@ -15,48 +27,108 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { redirectToWhatsApp } from "@/lib/whatsapp";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import FloatingCTA from "@/components/FloatingCTA";
+import { redirectToWhatsApp } from "@/lib/whatsapp";
 
 import baronImg from "@/assets/baron-side.jpg";
+import fazendaCasaImg from "@/assets/fazenda-casa.jpg";
 import fazendaImg from "@/assets/fazenda-campo.jpg";
 
+const heroAssets = [
+  {
+    label: "Fazenda Jurema",
+    meta: "Rural com estrutura",
+    image: "/Fazenda%20Jurema/fazenda%20jurema%20(2).jpeg",
+  },
+  {
+    label: "Loteamento Três Palmeiras",
+    meta: "Terrenos no RS",
+    image: "/15%20de%20Novembro%20RS/Quinze%20de%20Novembro%20-%2013%20lotes%20(1).jpeg",
+  },
+  {
+    label: "Casa São José",
+    meta: "Residencial em SC",
+    image: "/Casa%20S%C3%A3o%20Jos%C3%A9%20SC/Casa%20de%20S%C3%A3o%20Jos%C3%A9%20(20).jpeg",
+  },
+];
+
 const badges = [
-  { icon: FileCheck, text: "Ativos documentados" },
-  { icon: Shield, text: "Negociação com transparência" },
-  { icon: Users, text: "Atendimento consultivo" },
-  { icon: CalendarCheck, text: "Visitação sob agendamento" },
+  { icon: FileCheck2, text: "Ativos documentados" },
+  { icon: ShieldCheck, text: "Negociação transparente" },
+  { icon: BadgeCheck, text: "Curadoria patrimonial" },
+  { icon: CalendarCheck, text: "Visitas sob agenda" },
 ];
 
 const categories = [
-  { icon: Truck, title: "Caminhões", desc: "Veículos pesados selecionados, com documentação verificada e histórico rastreável." },
-  { icon: Trees, title: "Fazendas", desc: "Propriedades rurais estratégicas, com potencial produtivo e regularização documental." },
-  { icon: Plane, title: "Aeronaves", desc: "Aeronaves executivas e operacionais com configuração técnica conferida." },
-  { icon: Home, title: "Casas", desc: "Imóveis residenciais de alto padrão em localizações privilegiadas." },
-  { icon: Castle, title: "Mansões", desc: "Propriedades exclusivas para investidores e compradores exigentes." },
+  { icon: Trees, title: "Fazendas", desc: "Áreas rurais com potencial produtivo, acesso e documentação avaliados." },
+  { icon: Landmark, title: "Imóveis", desc: "Casas, terrenos, salas e loteamentos com leitura clara de oportunidade." },
+  { icon: Plane, title: "Aeronaves", desc: "Ativos executivos e operacionais com histórico técnico organizado." },
+  { icon: Truck, title: "Veículos pesados", desc: "Equipamentos e caminhões selecionados para compra segura." },
 ];
 
 const steps = [
-  { icon: Search, title: "Seleção de ativos", desc: "Identificamos e qualificamos oportunidades com potencial real de negócio." },
-  { icon: ClipboardCheck, title: "Verificação documental", desc: "Cada ativo passa por conferência de documentação e regularidade." },
-  { icon: Eye, title: "Atendimento reservado", desc: "Processo discreto e personalizado para cada investidor." },
-  { icon: CalendarCheck, title: "Agendamento de visita", desc: "Visitas presenciais ou técnicas mediante agendamento prévio." },
-  { icon: ShieldCheck, title: "Negociação segura", desc: "Suporte completo durante toda a jornada de compra." },
+  { icon: Search, title: "Seleção", desc: "Entendemos o perfil e filtramos ativos coerentes com o objetivo." },
+  { icon: ClipboardCheck, title: "Verificação", desc: "Conferimos documentos, contexto de uso e informações comerciais." },
+  { icon: Eye, title: "Apresentação", desc: "Organizamos dados, fotos, visita e próximos passos sem ruído." },
+  { icon: ShieldCheck, title: "Negociação", desc: "Acompanhamos a conversa até uma decisão segura e objetiva." },
+];
+
+const featured = [
+  {
+    title: "Fazenda Jurema",
+    label: "Propriedade rural",
+    desc: "Área produtiva com estrutura, pista de pouso e galpão coberto.",
+    href: "/fazenda-jurema",
+    image: fazendaImg,
+  },
+  {
+    title: "Beechcraft Baron B58",
+    label: "Aeronave executiva",
+    desc: "Baron B58 com apresentação técnica e histórico para análise.",
+    href: "/aeronave-baronb58",
+    image: baronImg,
+  },
+  {
+    title: "Portfólio de imóveis",
+    label: "Casas, lotes e áreas",
+    desc: "Listagem dinâmica de imóveis ATHS com filtros e galeria.",
+    href: "/imoveis",
+    image: "/15%20de%20Novembro%20RS/Quinze%20de%20Novembro%20-%2013%20lotes%20(1).jpeg",
+  },
 ];
 
 const faqItems = [
-  { q: "A ATHS trabalha apenas com ativos documentados?", a: "Sim. Todos os ativos intermediados pela ATHS passam por conferência de documentação e regularidade. Nosso compromisso é garantir segurança e transparência em cada negociação." },
-  { q: "É possível agendar visita presencial aos bens anunciados?", a: "Sim. As visitas presenciais são realizadas mediante agendamento prévio com nossa equipe comercial, garantindo organização e discrição." },
-  { q: "Como funciona o processo de atendimento e negociação?", a: "O processo começa com um contato consultivo para entender seu perfil e interesse. Em seguida, apresentamos os ativos compatíveis e acompanhamos toda a negociação." },
-  { q: "A ATHS atua com imóveis, fazendas, aeronaves e veículos?", a: "Sim. Atuamos com diversas categorias de ativos de alto valor, cada uma com curadoria e verificação específicas." },
-  { q: "Os anúncios passam por conferência antes da divulgação?", a: "Sim. Realizamos conferência das informações garantindo que os dados apresentados estejam alinhados com a documentação disponível." },
+  {
+    q: "A ATHS trabalha apenas com ativos documentados?",
+    a: "Sim. Cada ativo passa por conferência de documentação e regularidade antes de avançar em uma negociação.",
+  },
+  {
+    q: "É possível agendar visita presencial?",
+    a: "Sim. As visitas são organizadas mediante agendamento para manter discrição, segurança e aproveitamento da agenda.",
+  },
+  {
+    q: "Como funciona o atendimento?",
+    a: "O atendimento começa pela leitura do perfil do comprador. Depois a equipe apresenta ativos compatíveis e acompanha os próximos passos.",
+  },
+  {
+    q: "A ATHS atua com imóveis, fazendas, aeronaves e veículos?",
+    a: "Sim. A operação cobre ativos de alto valor com curadoria, documentação e negociação assistida.",
+  },
 ];
 
+const inputClass =
+  "w-full rounded-md border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/15";
+
 const Index = () => {
+  const [heroIndex, setHeroIndex] = useState(0);
   const [form, setForm] = useState({
-    nome: "", telefone: "",
-    ativo: "", faixa: "", finalidade: "", prazo: "", contato: "",
+    nome: "",
+    telefone: "",
+    ativo: "",
+    faixa: "",
+    finalidade: "",
+    prazo: "",
+    contato: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -74,204 +146,348 @@ const Index = () => {
   const refForm = useScrollReveal();
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen bg-[#f6f3ec] text-slate-950">
       <Header />
 
-      {/* Hero */}
-      <section className="bg-navy navy-texture relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-secondary/90 via-navy to-navy" />
-        <div className="container mx-auto px-4 lg:px-8 py-24 lg:py-36 relative z-10">
-          <div className="max-w-3xl animate-fade-in">
-            <div className="gold-line w-20 mb-8" />
-            <h1 className="text-3xl md:text-5xl lg:text-6xl text-white leading-tight mb-6">
-              Grandes patrimônios. Negócios seguros. Oportunidades selecionadas.
-            </h1>
-            <p className="text-white/70 text-lg md:text-xl max-w-2xl mb-10 font-sans">
-              A ATHS intermedeia ativos de alto valor — documentados, regularizados e qualificados — para compradores e investidores exigentes em todo o Brasil.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <a href="#formulario" className="bg-primary text-primary-foreground px-8 py-3.5 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                Falar com consultor
-              </a>
-              <a href="#destaques" className="border border-white/30 text-white px-8 py-3.5 rounded-md font-semibold font-sans hover:border-gold hover:text-gold transition-all duration-300">
-                Ver oportunidades em destaque
-              </a>
+      <main>
+        <section className="relative min-h-[760px] overflow-hidden bg-[#071211] text-white">
+          <img
+            key={heroAssets[heroIndex].image}
+            src={heroAssets[heroIndex].image}
+            alt={heroAssets[heroIndex].label}
+            className="motion-kenburns absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,13,12,0.9)_0%,rgba(4,13,12,0.68)_48%,rgba(4,13,12,0.28)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(216,182,106,0.14)_0%,transparent_32%,rgba(14,93,76,0.18)_100%)]" />
+          <div className="absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:72px_72px]" />
+
+          <div className="container relative z-10 mx-auto grid min-h-[760px] items-center gap-12 px-4 py-20 lg:grid-cols-[1fr_420px] lg:px-8">
+            <div className="max-w-4xl">
+              <div className="motion-reveal-up mb-6 inline-flex items-center gap-2 rounded-md border border-white/15 bg-white/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-emerald-100 backdrop-blur">
+                <Sparkles className="h-4 w-4" />
+                Curadoria de ativos de alto valor
+              </div>
+              <h1 className="motion-reveal-up motion-delay-1 max-w-4xl text-5xl font-bold leading-[0.96] text-white sm:text-6xl lg:text-7xl">
+                Patrimônio selecionado, negociação sem ruído.
+              </h1>
+              <p className="motion-reveal-up motion-delay-2 mt-7 max-w-2xl text-lg leading-8 text-white/80">
+                A ATHS organiza oportunidades em imóveis, fazendas, aeronaves e veículos pesados com foco em clareza,
+                documentação e atendimento consultivo.
+              </p>
+              <div className="motion-reveal-up motion-delay-3 mt-9 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href="#formulario"
+                  className="spotlight-sweep inline-flex items-center justify-center gap-2 overflow-hidden rounded-md bg-[#d8b66a] px-6 py-3 text-sm font-bold text-slate-950 shadow-xl shadow-black/20 transition hover:-translate-y-1 hover:bg-[#e2c57e]"
+                >
+                  Falar com consultor
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <Link
+                  to="/imoveis"
+                  className="inline-flex items-center justify-center gap-2 rounded-md border border-white/25 bg-white/10 px-6 py-3 text-sm font-bold text-white backdrop-blur transition hover:-translate-y-1 hover:bg-white/15"
+                >
+                  Ver imóveis
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+
+              <div className="motion-reveal-up motion-delay-4 mt-14 grid max-w-4xl gap-3 sm:grid-cols-3">
+                {[
+                  ["20+", "anos conectando negociações"],
+                  ["4", "categorias de ativos"],
+                  ["1:1", "atendimento consultivo"],
+                ].map(([value, label]) => (
+                  <div key={label} className="motion-card rounded-md border border-white/15 bg-white/10 p-4 backdrop-blur">
+                    <p className="text-3xl font-bold text-white">{value}</p>
+                    <p className="mt-1 text-sm text-white/70">{label}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Credibility badges */}
-      <section className="bg-card border-b border-border">
-        <div ref={refBadges} className="container mx-auto px-4 lg:px-8 py-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {badges.map((b, i) => (
-              <div key={b.text} className="reveal-item flex items-center gap-3 bg-muted rounded-lg p-4" style={{ transitionDelay: `${i * 100}ms` }}>
-                <b.icon size={20} className="text-primary shrink-0" />
-                <span className="text-sm font-medium font-sans text-foreground">{b.text}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Quem Somos */}
-      <section id="quem-somos" className="bg-off-white py-20 lg:py-28">
-        <div ref={refQuem} className="container mx-auto px-4 lg:px-8 max-w-4xl reveal-item">
-          <h2 className="text-3xl md:text-4xl text-foreground mb-8 text-center">Quem somos</h2>
-          <div className="gold-line w-16 mx-auto mb-8" />
-          <p className="text-muted-foreground text-lg leading-relaxed font-sans text-center">
-            Com mais de 20 anos conectando grandes negócios de alto padrão no Brasil, a ATHS é especializada na intermediação de ativos de alto valor. Nossa atuação abrange fazendas, aeronaves, imóveis de luxo e veículos pesados, sempre com foco absoluto em segurança documental, transparência e atendimento consultivo.
-          </p>
-        </div>
-      </section>
-
-      {/* Atuação */}
-      <section id="atuacao" className="bg-card py-20 lg:py-28">
-        <div ref={refAtuacao} className="container mx-auto px-4 lg:px-8">
-          <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Atuação da ATHS</h2>
-          <p className="text-muted-foreground text-center mb-12 font-sans max-w-2xl mx-auto">Curadoria patrimonial em categorias selecionadas de ativos de alto valor.</p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {categories.map((c, i) => (
-              <div key={c.title} className="reveal-item group bg-muted hover:bg-navy rounded-xl p-6 text-center transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-xl" style={{ transitionDelay: `${i * 80}ms` }}>
-                <c.icon size={36} className="mx-auto mb-4 text-primary group-hover:text-gold transition-colors" />
-                <h3 className="font-sans font-semibold text-foreground group-hover:text-white mb-2 transition-colors">{c.title}</h3>
-                <p className="text-sm text-muted-foreground group-hover:text-white/60 font-sans transition-colors">{c.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Como trabalhamos */}
-      <section className="bg-off-white py-20 lg:py-28">
-        <div ref={refSteps} className="container mx-auto px-4 lg:px-8">
-          <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Como a ATHS trabalha</h2>
-          <p className="text-muted-foreground text-center mb-16 font-sans">Um processo estruturado para garantir segurança em cada etapa.</p>
-          <div className="grid md:grid-cols-5 gap-8">
-            {steps.map((s, i) => (
-              <div key={s.title} className="reveal-item text-center" style={{ transitionDelay: `${i * 120}ms` }}>
-                <div className="w-14 h-14 rounded-full bg-navy text-white flex items-center justify-center mx-auto mb-4 text-lg font-bold font-sans">
-                  {i + 1}
+            <div className="hidden lg:block">
+              <div className="rounded-lg border border-white/15 bg-white/10 p-3 shadow-2xl shadow-black/25 backdrop-blur">
+                <div className="mb-3 flex items-center justify-between px-2 text-xs font-bold uppercase tracking-[0.18em] text-white/70">
+                  <span>Ativos em foco</span>
+                  <span>Live</span>
                 </div>
-                <s.icon size={24} className="mx-auto mb-3 text-primary" />
-                <h3 className="font-sans font-semibold text-foreground mb-2">{s.title}</h3>
-                <p className="text-sm text-muted-foreground font-sans">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Oportunidades em destaque */}
-      <section id="destaques" className="bg-navy navy-texture py-20 lg:py-28">
-        <div ref={refDestaques} className="container mx-auto px-4 lg:px-8">
-          <h2 className="text-3xl md:text-4xl text-white mb-4 text-center">Oportunidades em destaque</h2>
-          <div className="gold-line w-16 mx-auto mb-12" />
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <div className="reveal-item bg-white/5 backdrop-blur rounded-xl overflow-hidden border border-white/10 hover:border-gold/30 transition-all duration-500 hover:scale-[1.02]">
-              <img src={fazendaImg} alt="Fazenda Jurema – Sapezal, MT" className="w-full h-56 object-cover" />
-              <div className="p-6">
-                <h3 className="text-xl text-white mb-2 font-sans font-semibold">Fazenda Jurema — Sapezal, MT</h3>
-                <p className="text-white/60 text-sm font-sans mb-4">Ativo rural estratégico com 3.050 ha, potencial agrícola e documentação em dia. R$ 39.000.000,00.</p>
-                <Link to="/fazenda-jurema" className="inline-block bg-primary text-primary-foreground px-6 py-2.5 rounded-md font-sans font-semibold text-sm hover:bg-primary/90 transition-all hover:scale-105">
-                  Ver detalhes da Fazenda Jurema
-                </Link>
-              </div>
-            </div>
-            <div className="reveal-item bg-white/5 backdrop-blur rounded-xl overflow-hidden border border-white/10 hover:border-gold/30 transition-all duration-500 hover:scale-[1.02]" style={{ transitionDelay: "150ms" }}>
-              <img src={baronImg} alt="Beechcraft Baron B58" className="w-full h-56 object-cover" />
-              <div className="p-6">
-                <h3 className="text-xl text-white mb-2 font-sans font-semibold">Aeronave Beechcraft Baron B58</h3>
-                <p className="text-white/60 text-sm font-sans mb-4">Aeronave executiva, ano 1984, pintura nova 2025, Continental IO550 300 hp. R$ 3.500.000,00.</p>
-                <Link to="/aeronave-baronb58" className="inline-block bg-primary text-primary-foreground px-6 py-2.5 rounded-md font-sans font-semibold text-sm hover:bg-primary/90 transition-all hover:scale-105">
-                  Ver detalhes da aeronave
-                </Link>
+                <div className="space-y-3">
+                  {heroAssets.map((asset, index) => (
+                    <button
+                      key={asset.label}
+                      type="button"
+                      onMouseEnter={() => setHeroIndex(index)}
+                      onFocus={() => setHeroIndex(index)}
+                      onClick={() => setHeroIndex(index)}
+                      className={`group grid w-full grid-cols-[112px_1fr] items-center gap-4 rounded-md border p-2 text-left transition-all duration-300 ${
+                        heroIndex === index
+                          ? "border-[#d8b66a]/70 bg-white/20"
+                          : "border-white/10 bg-black/10 hover:border-white/30 hover:bg-white/15"
+                      }`}
+                    >
+                      <span className="block aspect-[4/3] overflow-hidden rounded-sm bg-slate-800">
+                        <img
+                          src={asset.image}
+                          alt={asset.label}
+                          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                        />
+                      </span>
+                      <span>
+                        <span className="block text-sm font-bold text-white">{asset.label}</span>
+                        <span className="mt-1 block text-xs text-white/60">{asset.meta}</span>
+                      </span>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Testimonials */}
-      <TestimonialsCarousel />
+          <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center overflow-hidden border-y border-white/10 bg-slate-950/55 py-3 backdrop-blur">
+            <div className="asset-marquee flex w-max whitespace-nowrap text-xs font-bold uppercase tracking-[0.22em] text-white/70">
+              <span className="mx-6">Documentação</span>
+              <span className="mx-6 text-[#d8b66a]">Curadoria</span>
+              <span className="mx-6">Visitas coordenadas</span>
+              <span className="mx-6 text-[#d8b66a]">Negociação assistida</span>
+              <span className="mx-6">Imóveis</span>
+              <span className="mx-6 text-[#d8b66a]">Fazendas</span>
+              <span className="mx-6">Aeronaves</span>
+              <span className="mx-6 text-[#d8b66a]">Ativos selecionados</span>
+            </div>
+          </div>
+        </section>
 
-      {/* FAQ */}
-      <section id="faq" className="bg-off-white py-20 lg:py-28">
-        <div ref={refFaq} className="container mx-auto px-4 lg:px-8 max-w-3xl reveal-item">
-          <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Perguntas Frequentes</h2>
-          <div className="gold-line w-16 mx-auto mb-12" />
-          <Accordion type="single" collapsible className="space-y-3">
-            {faqItems.map((f, i) => (
-              <AccordionItem key={i} value={`faq-${i}`} className="bg-card rounded-lg border border-border px-6">
-                <AccordionTrigger className="text-left font-sans font-medium text-foreground hover:text-primary">
-                  {f.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground font-sans text-sm leading-relaxed">
-                  {f.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </section>
+        <section className="relative z-20">
+          <div ref={refBadges} className="container mx-auto px-4 lg:px-8">
+            <div className="grid gap-3 rounded-lg border border-slate-200 bg-white p-3 shadow-2xl shadow-slate-950/10 sm:grid-cols-2 lg:grid-cols-4">
+              {badges.map((badge, index) => (
+                <div
+                  key={badge.text}
+                  className="reveal-item motion-card flex items-center gap-3 rounded-md bg-[#f6f3ec] p-4"
+                  style={{ transitionDelay: `${index * 80}ms` }}
+                >
+                  <badge.icon className="h-5 w-5 shrink-0 text-emerald-800" />
+                  <span className="text-sm font-semibold text-slate-800">{badge.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-      {/* Formulário — único */}
-      <section id="formulario" className="bg-card py-20 lg:py-28 border-t border-border">
-        <div ref={refForm} className="container mx-auto px-4 lg:px-8 max-w-2xl reveal-item">
-          <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Fale com um consultor</h2>
-          <p className="text-muted-foreground text-center mb-12 font-sans">Preencha o formulário para iniciar seu atendimento consultivo.</p>
-          <form className="space-y-5" onSubmit={handleSubmit}>
-            <input type="text" placeholder="Nome completo" required value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-shadow" />
-            <input type="tel" placeholder="Telefone / WhatsApp" required value={form.telefone} onChange={(e) => setForm({ ...form, telefone: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-shadow" />
+        <section id="quem-somos" className="py-20 lg:py-28">
+          <div ref={refQuem} className="container mx-auto grid items-end gap-10 px-4 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+            <div className="reveal-item">
+              <p className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-800">ATHS</p>
+              <h2 className="mt-4 text-4xl font-bold leading-tight text-slate-950 sm:text-5xl">
+                Um filtro rigoroso antes da oportunidade chegar até você.
+              </h2>
+            </div>
+            <div className="reveal-item space-y-6 text-base leading-8 text-slate-600">
+              <p>
+                A ATHS atua na intermediação de ativos de alto valor com uma operação direta: entender o comprador,
+                organizar as informações essenciais e conduzir uma negociação documentada.
+              </p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {["Documentação conferida", "Atendimento discreto", "Visitas coordenadas", "Negociação assistida"].map(
+                  (item) => (
+                    <div key={item} className="flex items-center gap-2 text-sm font-semibold text-slate-800">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-800" />
+                      {item}
+                    </div>
+                  ),
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
 
-            <select required value={form.ativo} onChange={(e) => setForm({ ...form, ativo: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Qual ativo é do seu interesse?</option>
-              <option>Caminhões</option>
-              <option>Fazendas</option>
-              <option>Aeronaves</option>
-              <option>Casas</option>
-              <option>Mansões</option>
-              <option>Outros</option>
-            </select>
+        <section id="atuacao" className="border-y border-slate-200 bg-white py-20 lg:py-28">
+          <div ref={refAtuacao} className="container mx-auto px-4 lg:px-8">
+            <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-800">Atuação</p>
+                <h2 className="mt-3 text-4xl font-bold text-slate-950">Categorias com leitura objetiva.</h2>
+              </div>
+              <Link to="/imoveis" className="inline-flex items-center gap-2 text-sm font-bold text-emerald-900 hover:text-emerald-700">
+                Abrir portfólio de imóveis
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {categories.map((category, index) => (
+                <div
+                  key={category.title}
+                  className="reveal-item motion-card group rounded-lg border border-slate-200 bg-[#f8f6f0] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-800/30 hover:bg-slate-950 hover:text-white hover:shadow-xl"
+                  style={{ transitionDelay: `${index * 90}ms` }}
+                >
+                  <category.icon className="h-8 w-8 text-emerald-800 transition group-hover:text-[#d8b66a]" />
+                  <h3 className="mt-8 text-xl font-bold">{category.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-slate-600 transition group-hover:text-white/70">{category.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            <select value={form.faixa} onChange={(e) => setForm({ ...form, faixa: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Faixa de investimento disponível</option>
-              <option>Até R$ 500.000</option>
-              <option>R$ 500.000 a R$ 2.000.000</option>
-              <option>R$ 2.000.000 a R$ 10.000.000</option>
-              <option>R$ 10.000.000 a R$ 50.000.000</option>
-              <option>Acima de R$ 50.000.000</option>
-            </select>
+        <section className="py-20 lg:py-28">
+          <div ref={refSteps} className="container mx-auto px-4 lg:px-8">
+            <div className="mx-auto mb-12 max-w-2xl text-center">
+              <p className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-800">Processo</p>
+              <h2 className="mt-3 text-4xl font-bold text-slate-950">Menos ansiedade, mais clareza por etapa.</h2>
+            </div>
+            <div className="grid gap-4 md:grid-cols-4">
+              {steps.map((step, index) => (
+                <div
+                  key={step.title}
+                  className="reveal-item motion-card relative rounded-lg border border-slate-200 bg-white p-6 shadow-sm"
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                >
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">0{index + 1}</span>
+                  <step.icon className="mt-8 h-6 w-6 text-emerald-800" />
+                  <h3 className="mt-4 text-xl font-bold text-slate-950">{step.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-slate-600">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            <select value={form.finalidade} onChange={(e) => setForm({ ...form, finalidade: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">A compra será para uso, patrimônio ou investimento?</option>
-              <option>Uso próprio</option>
-              <option>Patrimônio</option>
-              <option>Investimento</option>
-              <option>Outro</option>
-            </select>
+        <section id="destaques" className="bg-slate-950 py-20 text-white lg:py-28">
+          <div ref={refDestaques} className="container mx-auto px-4 lg:px-8">
+            <div className="mb-12 max-w-2xl">
+              <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#d8b66a]">Destaques</p>
+              <h2 className="mt-3 text-4xl font-bold">Ativos para análise imediata.</h2>
+            </div>
+            <div className="grid gap-5 lg:grid-cols-3">
+              {featured.map((item, index) => (
+                <Link
+                  key={item.title}
+                  to={item.href}
+                  className="reveal-item motion-card group overflow-hidden rounded-lg border border-white/10 bg-white/10 transition-all duration-300 hover:-translate-y-1 hover:border-[#d8b66a]/50"
+                  style={{ transitionDelay: `${index * 110}ms` }}
+                >
+                  <div className="aspect-[4/3] overflow-hidden bg-slate-800">
+                    <img src={item.image} alt={item.title} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+                  </div>
+                  <div className="p-6">
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#d8b66a]">{item.label}</p>
+                    <h3 className="mt-3 text-2xl font-bold text-white">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-6 text-white/60">{item.desc}</p>
+                    <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-white">
+                      Ver detalhes
+                      <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            <select value={form.prazo} onChange={(e) => setForm({ ...form, prazo: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Em quanto tempo pretende avançar?</option>
-              <option>Imediatamente</option>
-              <option>Em até 30 dias</option>
-              <option>Em até 90 dias</option>
-              <option>Sem prazo definido</option>
-            </select>
+        <TestimonialsCarousel />
 
-            <select value={form.contato} onChange={(e) => setForm({ ...form, contato: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Prefere receber contato por...</option>
-              <option>Ligação</option>
-              <option>WhatsApp</option>
-            </select>
+        <section id="faq" className="bg-white py-20 lg:py-28">
+          <div ref={refFaq} className="container mx-auto grid gap-10 px-4 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
+            <div className="reveal-item">
+              <p className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-800">FAQ</p>
+              <h2 className="mt-3 text-4xl font-bold text-slate-950">Perguntas antes do primeiro contato.</h2>
+            </div>
+            <Accordion type="single" collapsible className="reveal-item space-y-3">
+              {faqItems.map((faq, index) => (
+                <AccordionItem key={index} value={`faq-${index}`} className="rounded-lg border border-slate-200 px-5">
+                  <AccordionTrigger className="text-left font-sans text-base font-bold text-slate-900 hover:text-emerald-800">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm leading-7 text-slate-600">{faq.a}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </section>
 
-            <button type="submit" className="w-full bg-primary text-primary-foreground py-3.5 rounded-md font-sans font-semibold hover:bg-primary/90 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-              Enviar e falar com consultor
-            </button>
-          </form>
-        </div>
-      </section>
+        <section id="formulario" className="py-20 lg:py-28">
+          <div ref={refForm} className="container mx-auto grid gap-10 px-4 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+            <div className="reveal-item overflow-hidden rounded-lg bg-slate-950 text-white">
+              <img src={fazendaCasaImg} alt="Casa em propriedade ATHS" className="h-72 w-full object-cover opacity-90" />
+              <div className="p-8">
+                <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#d8b66a]">Contato</p>
+                <h2 className="mt-3 text-4xl font-bold">Conte o que procura. A equipe filtra o resto.</h2>
+                <p className="mt-4 text-sm leading-7 text-white/70">
+                  O formulário abre uma conversa direta no WhatsApp com os dados essenciais para iniciar o atendimento.
+                </p>
+              </div>
+            </div>
+
+            <form className="reveal-item rounded-lg border border-slate-200 bg-white p-5 shadow-xl shadow-slate-950/5 sm:p-7" onSubmit={handleSubmit}>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <input
+                  type="text"
+                  placeholder="Nome completo"
+                  required
+                  value={form.nome}
+                  onChange={(e) => setForm({ ...form, nome: e.target.value })}
+                  className={inputClass}
+                />
+                <input
+                  type="tel"
+                  placeholder="Telefone / WhatsApp"
+                  required
+                  value={form.telefone}
+                  onChange={(e) => setForm({ ...form, telefone: e.target.value })}
+                  className={inputClass}
+                />
+              </div>
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                <select required value={form.ativo} onChange={(e) => setForm({ ...form, ativo: e.target.value })} className={inputClass}>
+                  <option value="">Ativo de interesse</option>
+                  <option>Caminhões</option>
+                  <option>Fazendas</option>
+                  <option>Aeronaves</option>
+                  <option>Casas</option>
+                  <option>Imóveis comerciais</option>
+                  <option>Outros</option>
+                </select>
+                <select value={form.faixa} onChange={(e) => setForm({ ...form, faixa: e.target.value })} className={inputClass}>
+                  <option value="">Faixa de investimento</option>
+                  <option>Até R$ 500.000</option>
+                  <option>R$ 500.000 a R$ 2.000.000</option>
+                  <option>R$ 2.000.000 a R$ 10.000.000</option>
+                  <option>R$ 10.000.000 a R$ 50.000.000</option>
+                  <option>Acima de R$ 50.000.000</option>
+                </select>
+              </div>
+              <div className="mt-4 grid gap-4 sm:grid-cols-3">
+                <select value={form.finalidade} onChange={(e) => setForm({ ...form, finalidade: e.target.value })} className={inputClass}>
+                  <option value="">Finalidade</option>
+                  <option>Uso próprio</option>
+                  <option>Patrimônio</option>
+                  <option>Investimento</option>
+                  <option>Outro</option>
+                </select>
+                <select value={form.prazo} onChange={(e) => setForm({ ...form, prazo: e.target.value })} className={inputClass}>
+                  <option value="">Prazo</option>
+                  <option>Imediatamente</option>
+                  <option>Em até 30 dias</option>
+                  <option>Em até 90 dias</option>
+                  <option>Sem prazo definido</option>
+                </select>
+                <select value={form.contato} onChange={(e) => setForm({ ...form, contato: e.target.value })} className={inputClass}>
+                  <option value="">Contato por</option>
+                  <option>Ligação</option>
+                  <option>WhatsApp</option>
+                </select>
+              </div>
+              <button
+                type="submit"
+                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-md bg-emerald-900 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-950/15 transition hover:-translate-y-0.5 hover:bg-emerald-800"
+              >
+                Enviar e falar com consultor
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </form>
+          </div>
+        </section>
+      </main>
 
       <FloatingCTA />
       <Footer />
