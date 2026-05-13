@@ -10,9 +10,10 @@ import {
 } from "@/components/ui/accordion";
 import {
   MapPin, DollarSign, Ruler, Sprout, Mountain, Droplets, Zap,
-  Home as HomeIcon, Building, Container, Warehouse, ShieldCheck, CalendarCheck
+  Home as HomeIcon, Building, Container, Warehouse, ShieldCheck,
+  CalendarCheck, MessageCircle,
 } from "lucide-react";
-import { redirectToWhatsApp } from "@/lib/whatsapp";
+import { WA_FAZENDA_JUREMA, WA_FAZENDA_VISITA } from "@/lib/whatsapp";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import FloatingCTA from "@/components/FloatingCTA";
 
@@ -71,15 +72,6 @@ const galleryImages = [
 
 const FazendaJurema = () => {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [form, setForm] = useState({
-    nome: "", telefone: "",
-    finalidade: "", faixa: "", tipo: "", prazo: "", experiencia: "", contato: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    redirectToWhatsApp("Fazenda Jurema (Sapezal – MT)", "Fazenda Jurema", form);
-  };
 
   const refOverview = useScrollReveal();
   const refPotencial = useScrollReveal();
@@ -88,7 +80,7 @@ const FazendaJurema = () => {
   const refBenf = useScrollReveal();
   const refDoc = useScrollReveal();
   const refFaq = useScrollReveal();
-  const refForm = useScrollReveal();
+  const refContato = useScrollReveal();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -111,10 +103,22 @@ const FazendaJurema = () => {
               <span className="bg-white/10 px-3 py-1 rounded">Documentação em dia</span>
             </div>
             <div className="flex flex-wrap gap-4">
-              <a href="#formulario" className="bg-primary text-primary-foreground px-8 py-3.5 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105">
+              <a
+                href={WA_FAZENDA_JUREMA}
+                target="_blank"
+                rel="noreferrer"
+                data-gtm="whatsapp-fazenda-hero-interesse"
+                className="bg-primary text-primary-foreground px-8 py-3.5 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105"
+              >
                 Quero falar sobre esta fazenda
               </a>
-              <a href="#formulario" className="border border-white/30 text-white px-8 py-3.5 rounded-md font-semibold font-sans hover:border-gold hover:text-gold transition-all duration-300">
+              <a
+                href={WA_FAZENDA_VISITA}
+                target="_blank"
+                rel="noreferrer"
+                data-gtm="whatsapp-fazenda-hero-visita"
+                className="border border-white/30 text-white px-8 py-3.5 rounded-md font-semibold font-sans hover:border-gold hover:text-gold transition-all duration-300"
+              >
                 Solicitar visita técnica
               </a>
             </div>
@@ -140,17 +144,13 @@ const FazendaJurema = () => {
         </div>
       </section>
 
-
-
       {/* Delimitação e área da propriedade */}
       <section className="bg-off-white py-20 lg:py-28">
         <div ref={refMapa} className="container mx-auto px-4 lg:px-8 max-w-6xl reveal-item">
           <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Delimitação e área da propriedade</h2>
           <div className="gold-line w-16 mx-auto mb-12" />
 
-          {/* Two-column layout: map left, data right */}
           <div className="flex flex-col lg:flex-row gap-10 items-stretch mb-10">
-
             <div className="flex flex-col items-center lg:w-1/2 w-full">
               <img
                 src={mapaReal}
@@ -163,9 +163,7 @@ const FazendaJurema = () => {
               </p>
             </div>
 
-              {/* Right column: property data + Potencial produtivo */}
             <div className="flex flex-col lg:w-1/2 w-full">
-              {/* Potencial produtivo card */}
               <div className="bg-card rounded-xl p-8 border border-border h-full flex flex-col justify-center">
                 <h3 className="text-xl md:text-2xl font-semibold text-foreground font-sans mb-8">Potencial produtivo</h3>
                 <div className="flex flex-col gap-6">
@@ -188,7 +186,6 @@ const FazendaJurema = () => {
             </div>
           </div>
 
-          {/* Google Maps — full width below columns */}
           <div className="rounded-xl overflow-hidden border border-border shadow-md">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15000!2d-58.8!3d-13.5!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDMwJzAwLjAiUyA1OMKwNDgnMDAuMCJX!5e0!3m2!1spt-BR!2sbr"
@@ -255,7 +252,7 @@ const FazendaJurema = () => {
         </div>
       </section>
 
-      {/* Segurança documental + Visitação combinados */}
+      {/* Segurança documental */}
       <section className="bg-navy navy-texture py-20 lg:py-28">
         <div ref={refDoc} className="container mx-auto px-4 lg:px-8 max-w-3xl text-center reveal-item">
           <ShieldCheck size={48} className="text-gold mx-auto mb-6" />
@@ -267,7 +264,14 @@ const FazendaJurema = () => {
           <p className="text-white/70 font-sans leading-relaxed mb-8">
             Visitas presenciais e técnicas são realizadas mediante agendamento prévio. A ATHS atua com discrição e reserva de informações sensíveis.
           </p>
-          <a href="#formulario" className="inline-block bg-primary text-primary-foreground px-8 py-3.5 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105">
+          <a
+            href={WA_FAZENDA_VISITA}
+            target="_blank"
+            rel="noreferrer"
+            data-gtm="whatsapp-fazenda-doc-visita"
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105"
+          >
+            <CalendarCheck size={18} />
             Agendar visita técnica
           </a>
         </div>
@@ -288,55 +292,36 @@ const FazendaJurema = () => {
         </div>
       </section>
 
-      {/* Formulário único — específico Fazenda */}
-      <section id="formulario" className="bg-off-white py-20 lg:py-28 border-t border-border">
-        <div ref={refForm} className="container mx-auto px-4 lg:px-8 max-w-2xl reveal-item">
-          <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Fale com um especialista</h2>
-          <p className="text-muted-foreground text-center mb-12 font-sans">Preencha o formulário para iniciar a conversa sobre a Fazenda Jurema.</p>
-          <form className="space-y-5" onSubmit={handleSubmit}>
-            <input type="text" placeholder="Nome completo" required value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-shadow" />
-            <input type="tel" placeholder="Telefone / WhatsApp" required value={form.telefone} onChange={(e) => setForm({ ...form, telefone: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-shadow" />
-            <select required value={form.finalidade} onChange={(e) => setForm({ ...form, finalidade: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Você busca a propriedade para...</option>
-              <option>Operação agrícola</option>
-              <option>Investimento patrimonial</option>
-              <option>Expansão de portfólio</option>
-              <option>Outro</option>
-            </select>
-            <select value={form.faixa} onChange={(e) => setForm({ ...form, faixa: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Faixa de investimento estimada</option>
-              <option>Até R$ 10.000.000</option>
-              <option>R$ 10.000.000 a R$ 30.000.000</option>
-              <option>R$ 30.000.000 a R$ 50.000.000</option>
-              <option>Acima de R$ 50.000.000</option>
-            </select>
-            <select value={form.tipo} onChange={(e) => setForm({ ...form, tipo: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Pretende comprar como...</option>
-              <option>Pessoa física</option>
-              <option>Pessoa jurídica</option>
-              <option>Grupo investidor</option>
-            </select>
-            <select value={form.prazo} onChange={(e) => setForm({ ...form, prazo: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Em quanto tempo pretende avançar?</option>
-              <option>Imediatamente</option>
-              <option>Em até 30 dias</option>
-              <option>Em até 90 dias</option>
-              <option>Sem prazo definido</option>
-            </select>
-            <select value={form.experiencia} onChange={(e) => setForm({ ...form, experiencia: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Já adquiriu propriedade rural acima de R$ 10 milhões?</option>
-              <option>Sim</option>
-              <option>Não</option>
-            </select>
-            <select value={form.contato} onChange={(e) => setForm({ ...form, contato: e.target.value })} className="w-full border border-border bg-background rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Prefere receber contato por...</option>
-              <option>Ligação</option>
-              <option>WhatsApp</option>
-            </select>
-            <button type="submit" className="w-full bg-primary text-primary-foreground py-3.5 rounded-md font-sans font-semibold hover:bg-primary/90 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-              Enviar e falar com especialista em imóveis rurais
-            </button>
-          </form>
+      {/* Contato direto — WhatsApp */}
+      <section id="contato" className="bg-off-white py-20 lg:py-28 border-t border-border">
+        <div ref={refContato} className="container mx-auto px-4 lg:px-8 max-w-2xl reveal-item text-center">
+          <ShieldCheck size={40} className="text-primary mx-auto mb-6" />
+          <h2 className="text-3xl md:text-4xl text-foreground mb-4">Fale com um especialista</h2>
+          <p className="text-muted-foreground mb-10 font-sans max-w-lg mx-auto">
+            Inicie a conversa pelo WhatsApp. A equipe ATHS apresenta os dados completos e organiza sua visita à Fazenda Jurema.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href={WA_FAZENDA_JUREMA}
+              target="_blank"
+              rel="noreferrer"
+              data-gtm="whatsapp-fazenda-cta-interesse"
+              className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105 text-sm"
+            >
+              <MessageCircle size={18} />
+              Quero falar sobre esta fazenda
+            </a>
+            <a
+              href={WA_FAZENDA_VISITA}
+              target="_blank"
+              rel="noreferrer"
+              data-gtm="whatsapp-fazenda-cta-visita"
+              className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-md font-semibold font-sans hover:border-primary hover:text-primary transition-all duration-300 text-sm"
+            >
+              <CalendarCheck size={18} />
+              Solicitar visita técnica
+            </a>
+          </div>
         </div>
       </section>
 

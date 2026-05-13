@@ -298,7 +298,12 @@ const PropertiesPage = () => {
                   </div>
                   <p className="mt-5 text-lg font-bold text-slate-950">{formatarPreco(imovel.preco)}</p>
                   <Button asChild className="mt-auto w-full bg-emerald-900 hover:bg-emerald-800">
-                    <a href={criarWhatsAppUrl(imovel)} target="_blank" rel="noreferrer">
+                    <a
+                      href={criarWhatsAppUrl(imovel)}
+                      target="_blank"
+                      rel="noreferrer"
+                      data-gtm={`whatsapp-imovel-${imovel.id}`}
+                    >
                       <MessageCircle className="h-4 w-4" />
                       Falar no WhatsApp
                     </a>

@@ -68,6 +68,7 @@ const Footer = () => (
                 href="https://wa.me/554792838021?text=Vim%20do%20site%2C%20quero%20tirar%20d%C3%BAvidas!"
                 target="_blank"
                 rel="noopener noreferrer"
+                data-gtm="whatsapp-footer"
                 className="flex gap-3 transition hover:text-white"
               >
                 <Phone className="mt-0.5 h-4 w-4 shrink-0 text-[#d8b66a]" />

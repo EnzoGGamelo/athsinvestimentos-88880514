@@ -9,6 +9,7 @@ import {
   Eye,
   FileCheck2,
   Landmark,
+  MessageCircle,
   Plane,
   Search,
   ShieldCheck,
@@ -28,7 +29,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { redirectToWhatsApp } from "@/lib/whatsapp";
+import {
+  WA_GERAL,
+  WA_HOME_BARON,
+  WA_HOME_FAZENDA,
+  WA_HOME_IMOVEIS,
+} from "@/lib/whatsapp";
 
 import baronImg from "@/assets/baron-side.jpg";
 import fazendaCasaImg from "@/assets/fazenda-casa.jpg";
@@ -116,26 +122,15 @@ const faqItems = [
   },
 ];
 
-const inputClass =
-  "w-full rounded-md border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/15";
+const ctaOptions = [
+  { label: "🌾  Fazenda Jurema — Sapezal, MT", href: WA_HOME_FAZENDA, gtm: "whatsapp-home-opcao-fazenda" },
+  { label: "✈️  Aeronave Baron B58", href: WA_HOME_BARON, gtm: "whatsapp-home-opcao-baron" },
+  { label: "🏠  Imóveis e loteamentos", href: WA_HOME_IMOVEIS, gtm: "whatsapp-home-opcao-imoveis" },
+  { label: "💬  Outro ativo ou dúvida", href: WA_GERAL, gtm: "whatsapp-home-opcao-geral" },
+];
 
 const Index = () => {
   const [heroIndex, setHeroIndex] = useState(0);
-  const [form, setForm] = useState({
-    nome: "",
-    telefone: "",
-    ativo: "",
-    faixa: "",
-    finalidade: "",
-    prazo: "",
-    contato: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const product = form.ativo || "Ativos em geral";
-    redirectToWhatsApp(product, "Home ATHS", form);
-  };
 
   const refBadges = useScrollReveal();
   const refQuem = useScrollReveal();
@@ -143,7 +138,7 @@ const Index = () => {
   const refSteps = useScrollReveal();
   const refDestaques = useScrollReveal();
   const refFaq = useScrollReveal();
-  const refForm = useScrollReveal();
+  const refContato = useScrollReveal();
 
   return (
     <div className="min-h-screen bg-[#f6f3ec] text-slate-950">
@@ -176,7 +171,10 @@ const Index = () => {
               </p>
               <div className="motion-reveal-up motion-delay-3 mt-9 flex flex-col gap-3 sm:flex-row">
                 <a
-                  href="#formulario"
+                  href={WA_GERAL}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-gtm="whatsapp-home-hero"
                   className="spotlight-sweep inline-flex items-center justify-center gap-2 overflow-hidden rounded-md bg-[#d8b66a] px-6 py-3 text-sm font-bold text-slate-950 shadow-xl shadow-black/20 transition hover:-translate-y-1 hover:bg-[#e2c57e]"
                 >
                   Falar com consultor
@@ -405,86 +403,53 @@ const Index = () => {
           </div>
         </section>
 
-        <section id="formulario" className="py-20 lg:py-28">
-          <div ref={refForm} className="container mx-auto grid gap-10 px-4 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+        <section id="contato" className="py-20 lg:py-28">
+          <div ref={refContato} className="container mx-auto grid gap-10 px-4 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
             <div className="reveal-item overflow-hidden rounded-lg bg-slate-950 text-white">
               <img src={fazendaCasaImg} alt="Casa em propriedade ATHS" className="h-72 w-full object-cover opacity-90" />
               <div className="p-8">
-                <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#d8b66a]">Contato</p>
+                <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#d8b66a]">Contato direto</p>
                 <h2 className="mt-3 text-4xl font-bold">Conte o que procura. A equipe filtra o resto.</h2>
                 <p className="mt-4 text-sm leading-7 text-white/70">
-                  O formulário abre uma conversa direta no WhatsApp com os dados essenciais para iniciar o atendimento.
+                  Atendimento consultivo direto pelo WhatsApp. Sem formulários, sem espera.
                 </p>
               </div>
             </div>
 
-            <form className="reveal-item rounded-lg border border-slate-200 bg-white p-5 shadow-xl shadow-slate-950/5 sm:p-7" onSubmit={handleSubmit}>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <input
-                  type="text"
-                  placeholder="Nome completo"
-                  required
-                  value={form.nome}
-                  onChange={(e) => setForm({ ...form, nome: e.target.value })}
-                  className={inputClass}
-                />
-                <input
-                  type="tel"
-                  placeholder="Telefone / WhatsApp"
-                  required
-                  value={form.telefone}
-                  onChange={(e) => setForm({ ...form, telefone: e.target.value })}
-                  className={inputClass}
-                />
+            <div className="reveal-item flex flex-col justify-center gap-6 rounded-lg border border-slate-200 bg-white p-8 shadow-xl shadow-slate-950/5">
+              <div>
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-emerald-800">Atendimento direto</p>
+                <h3 className="mt-3 text-2xl font-bold text-slate-950">Qual ativo você procura?</h3>
+                <p className="mt-3 text-sm leading-7 text-slate-600">
+                  Escolha o ativo de interesse e inicie a conversa com a mensagem já organizada para o consultor.
+                </p>
               </div>
-              <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                <select required value={form.ativo} onChange={(e) => setForm({ ...form, ativo: e.target.value })} className={inputClass}>
-                  <option value="">Ativo de interesse</option>
-                  <option>Caminhões</option>
-                  <option>Fazendas</option>
-                  <option>Aeronaves</option>
-                  <option>Casas</option>
-                  <option>Imóveis comerciais</option>
-                  <option>Outros</option>
-                </select>
-                <select value={form.faixa} onChange={(e) => setForm({ ...form, faixa: e.target.value })} className={inputClass}>
-                  <option value="">Faixa de investimento</option>
-                  <option>Até R$ 500.000</option>
-                  <option>R$ 500.000 a R$ 2.000.000</option>
-                  <option>R$ 2.000.000 a R$ 10.000.000</option>
-                  <option>R$ 10.000.000 a R$ 50.000.000</option>
-                  <option>Acima de R$ 50.000.000</option>
-                </select>
+              <div className="grid gap-3">
+                {ctaOptions.map(({ label, href, gtm }) => (
+                  <a
+                    key={gtm}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    data-gtm={gtm}
+                    className="flex items-center justify-between rounded-md border border-slate-200 bg-[#f6f3ec] px-5 py-4 text-sm font-semibold text-slate-800 transition hover:border-emerald-800/40 hover:bg-emerald-50 hover:text-emerald-900"
+                  >
+                    {label}
+                    <ArrowRight className="h-4 w-4 shrink-0" />
+                  </a>
+                ))}
               </div>
-              <div className="mt-4 grid gap-4 sm:grid-cols-3">
-                <select value={form.finalidade} onChange={(e) => setForm({ ...form, finalidade: e.target.value })} className={inputClass}>
-                  <option value="">Finalidade</option>
-                  <option>Uso próprio</option>
-                  <option>Patrimônio</option>
-                  <option>Investimento</option>
-                  <option>Outro</option>
-                </select>
-                <select value={form.prazo} onChange={(e) => setForm({ ...form, prazo: e.target.value })} className={inputClass}>
-                  <option value="">Prazo</option>
-                  <option>Imediatamente</option>
-                  <option>Em até 30 dias</option>
-                  <option>Em até 90 dias</option>
-                  <option>Sem prazo definido</option>
-                </select>
-                <select value={form.contato} onChange={(e) => setForm({ ...form, contato: e.target.value })} className={inputClass}>
-                  <option value="">Contato por</option>
-                  <option>Ligação</option>
-                  <option>WhatsApp</option>
-                </select>
-              </div>
-              <button
-                type="submit"
-                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-md bg-emerald-900 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-950/15 transition hover:-translate-y-0.5 hover:bg-emerald-800"
+              <a
+                href={WA_GERAL}
+                target="_blank"
+                rel="noreferrer"
+                data-gtm="whatsapp-home-cta-principal"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-emerald-900 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-950/15 transition hover:-translate-y-0.5 hover:bg-emerald-800"
               >
-                Enviar e falar com consultor
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </form>
+                <MessageCircle className="h-4 w-4" />
+                Falar com consultor agora
+              </a>
+            </div>
           </div>
         </section>
       </main>

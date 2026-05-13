@@ -10,9 +10,15 @@ import {
 } from "@/components/ui/accordion";
 import {
   Plane, Gauge, Paintbrush, Cog, Navigation, ShieldCheck,
-  Armchair, Activity, Wrench, Eye, Fuel, Shield
+  Armchair, Activity, Wrench, Eye, Fuel, Shield, MessageCircle, CalendarCheck,
 } from "lucide-react";
-import { redirectToWhatsApp } from "@/lib/whatsapp";
+import {
+  WA_BARON_INTERESSE,
+  WA_BARON_FICHA,
+  WA_BARON_COCKPIT,
+  WA_BARON_CABINE,
+  WA_BARON_INSPECAO,
+} from "@/lib/whatsapp";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import FloatingCTA from "@/components/FloatingCTA";
 
@@ -55,15 +61,6 @@ const allImages = [
 
 const AeronaveBaronB58 = () => {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [form, setForm] = useState({
-    nome: "", telefone: "",
-    finalidade: "", faixa: "", experiencia: "", prazo: "", contato: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    redirectToWhatsApp("Aeronave Beechcraft Baron B58", "Aeronave Baron B58", form);
-  };
 
   const refSpecs = useScrollReveal();
   const refCockpit = useScrollReveal();
@@ -73,7 +70,7 @@ const AeronaveBaronB58 = () => {
   const refAvionics = useScrollReveal();
   const refCondition = useScrollReveal();
   const refFaq = useScrollReveal();
-  const refForm = useScrollReveal();
+  const refContato = useScrollReveal();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -97,10 +94,22 @@ const AeronaveBaronB58 = () => {
               <span className="bg-white/10 px-3 py-1 rounded">Continental IO550 300 hp</span>
             </div>
             <div className="flex flex-wrap gap-4">
-              <a href="#formulario" className="bg-primary text-primary-foreground px-8 py-3.5 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105">
+              <a
+                href={WA_BARON_INTERESSE}
+                target="_blank"
+                rel="noreferrer"
+                data-gtm="whatsapp-baron-hero-interesse"
+                className="bg-primary text-primary-foreground px-8 py-3.5 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105"
+              >
                 Quero falar sobre esta aeronave
               </a>
-              <a href="#formulario" className="border border-white/30 text-white px-8 py-3.5 rounded-md font-semibold font-sans hover:border-gold hover:text-gold transition-all duration-300">
+              <a
+                href={WA_BARON_FICHA}
+                target="_blank"
+                rel="noreferrer"
+                data-gtm="whatsapp-baron-hero-ficha"
+                className="border border-white/30 text-white px-8 py-3.5 rounded-md font-semibold font-sans hover:border-gold hover:text-gold transition-all duration-300"
+              >
                 Solicitar ficha técnica completa
               </a>
             </div>
@@ -150,7 +159,7 @@ const AeronaveBaronB58 = () => {
         </div>
       </section>
 
-      {/* Cockpit — imagem + texto */}
+      {/* Cockpit */}
       <section className="bg-off-white py-20 lg:py-28">
         <div ref={refCockpit} className="container mx-auto px-4 lg:px-8 max-w-6xl reveal-item">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -171,7 +180,14 @@ const AeronaveBaronB58 = () => {
                 <p>Comandos duplos permitem operação por dois pilotos, ampliando segurança e flexibilidade operacional. A ergonomia do painel facilita a leitura rápida de todos os indicadores de voo.</p>
                 <p>Os manetes de potência e mistura dos dois motores Continental IO550 ficam na posição central, permitindo controle preciso de cada motor independentemente.</p>
               </div>
-              <a href="#formulario" className="inline-block mt-6 bg-primary text-primary-foreground px-6 py-3 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105 text-sm">
+              <a
+                href={WA_BARON_COCKPIT}
+                target="_blank"
+                rel="noreferrer"
+                data-gtm="whatsapp-baron-cockpit"
+                className="inline-flex items-center gap-2 mt-6 bg-primary text-primary-foreground px-6 py-3 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105 text-sm"
+              >
+                <MessageCircle size={16} />
                 Solicitar detalhes do cockpit
               </a>
             </div>
@@ -179,7 +195,7 @@ const AeronaveBaronB58 = () => {
         </div>
       </section>
 
-      {/* Cabine de passageiros — texto + imagem (invertido) */}
+      {/* Cabine de passageiros */}
       <section className="bg-card py-20 lg:py-28">
         <div ref={refCabin} className="container mx-auto px-4 lg:px-8 max-w-6xl reveal-item">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -194,7 +210,14 @@ const AeronaveBaronB58 = () => {
                 <p>A cabine conta com ar-condicionado, iluminação interna, bagageiro acessível em voo e isolamento acústico que proporciona uma experiência silenciosa e confortável.</p>
                 <p>Ideal para viagens de negócios, traslados familiares ou deslocamentos que exigem privacidade e agilidade operacional.</p>
               </div>
-              <a href="#formulario" className="inline-block mt-6 bg-primary text-primary-foreground px-6 py-3 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105 text-sm">
+              <a
+                href={WA_BARON_CABINE}
+                target="_blank"
+                rel="noreferrer"
+                data-gtm="whatsapp-baron-cabine"
+                className="inline-flex items-center gap-2 mt-6 bg-primary text-primary-foreground px-6 py-3 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105 text-sm"
+              >
+                <CalendarCheck size={16} />
                 Agendar visita à cabine
               </a>
             </div>
@@ -216,7 +239,7 @@ const AeronaveBaronB58 = () => {
         </div>
       </section>
 
-      {/* Instrumentação — imagem + texto */}
+      {/* Instrumentação */}
       <section className="bg-off-white py-20 lg:py-28">
         <div ref={refInstruments} className="container mx-auto px-4 lg:px-8 max-w-6xl reveal-item">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -319,7 +342,14 @@ const AeronaveBaronB58 = () => {
             <p>Pintura nova em 2025 com excelente apresentação. Cabine confortável para até 6 ocupantes, ideal para uso executivo.</p>
             <p>Documentação, histórico de manutenção e registros são apresentados sob atendimento consultivo. Inspeção e visita técnica podem ser agendadas com antecedência.</p>
           </div>
-          <a href="#formulario" className="inline-block mt-8 bg-primary text-primary-foreground px-8 py-3.5 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105">
+          <a
+            href={WA_BARON_INSPECAO}
+            target="_blank"
+            rel="noreferrer"
+            data-gtm="whatsapp-baron-inspecao"
+            className="inline-flex items-center gap-2 mt-8 bg-primary text-primary-foreground px-8 py-3.5 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105"
+          >
+            <CalendarCheck size={18} />
             Agendar inspeção
           </a>
         </div>
@@ -340,50 +370,36 @@ const AeronaveBaronB58 = () => {
         </div>
       </section>
 
-      {/* Formulário */}
-      <section id="formulario" className="bg-off-white py-20 lg:py-28 border-t border-border">
-        <div ref={refForm} className="container mx-auto px-4 lg:px-8 max-w-2xl reveal-item">
-          <h2 className="text-3xl md:text-4xl text-foreground mb-4 text-center">Fale com um consultor especializado</h2>
-          <p className="text-muted-foreground text-center mb-12 font-sans">Preencha o formulário para iniciar a conversa sobre a Baron B58.</p>
-          <form className="space-y-5" onSubmit={handleSubmit}>
-            <input type="text" placeholder="Nome completo" required value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-shadow" />
-            <input type="tel" placeholder="Telefone / WhatsApp" required value={form.telefone} onChange={(e) => setForm({ ...form, telefone: e.target.value })} className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-shadow" />
-            <select value={form.finalidade} onChange={(e) => setForm({ ...form, finalidade: e.target.value })} className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Você busca a aeronave para...</option>
-              <option>Uso próprio</option>
-              <option>Operação</option>
-              <option>Investimento</option>
-              <option>Revenda</option>
-            </select>
-            <select value={form.faixa} onChange={(e) => setForm({ ...form, faixa: e.target.value })} className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Faixa de investimento prevista</option>
-              <option>Até R$ 2.000.000</option>
-              <option>R$ 2.000.000 a R$ 5.000.000</option>
-              <option>R$ 5.000.000 a R$ 10.000.000</option>
-              <option>Acima de R$ 10.000.000</option>
-            </select>
-            <select value={form.experiencia} onChange={(e) => setForm({ ...form, experiencia: e.target.value })} className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Experiência com compra ou operação de aeronaves?</option>
-              <option>Sim, já adquiri aeronaves</option>
-              <option>Sim, opero aeronaves</option>
-              <option>Não, primeira aquisição</option>
-            </select>
-            <select value={form.prazo} onChange={(e) => setForm({ ...form, prazo: e.target.value })} className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Em quanto tempo pretende avançar?</option>
-              <option>Imediatamente</option>
-              <option>Em até 30 dias</option>
-              <option>Em até 90 dias</option>
-              <option>Sem prazo definido</option>
-            </select>
-            <select value={form.contato} onChange={(e) => setForm({ ...form, contato: e.target.value })} className="w-full border border-border bg-card rounded-md px-4 py-3 font-sans text-sm text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
-              <option value="">Prefere receber contato por...</option>
-              <option>Ligação</option>
-              <option>WhatsApp</option>
-            </select>
-            <button type="submit" className="w-full bg-primary text-primary-foreground py-3.5 rounded-md font-sans font-semibold hover:bg-primary/90 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-              Enviar e falar com consultor especializado
-            </button>
-          </form>
+      {/* Contato direto — WhatsApp */}
+      <section id="contato" className="bg-off-white py-20 lg:py-28 border-t border-border">
+        <div ref={refContato} className="container mx-auto px-4 lg:px-8 max-w-2xl reveal-item text-center">
+          <Plane size={40} className="text-primary mx-auto mb-6" />
+          <h2 className="text-3xl md:text-4xl text-foreground mb-4">Fale com um consultor especializado</h2>
+          <p className="text-muted-foreground mb-10 font-sans max-w-lg mx-auto">
+            Inicie a conversa pelo WhatsApp. A equipe ATHS apresenta a ficha técnica completa e organiza a inspeção da Baron B58.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href={WA_BARON_INTERESSE}
+              target="_blank"
+              rel="noreferrer"
+              data-gtm="whatsapp-baron-cta-interesse"
+              className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105 text-sm"
+            >
+              <MessageCircle size={18} />
+              Quero falar sobre esta aeronave
+            </a>
+            <a
+              href={WA_BARON_FICHA}
+              target="_blank"
+              rel="noreferrer"
+              data-gtm="whatsapp-baron-cta-ficha"
+              className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-md font-semibold font-sans hover:border-primary hover:text-primary transition-all duration-300 text-sm"
+            >
+              <Eye size={18} />
+              Solicitar ficha técnica
+            </a>
+          </div>
         </div>
       </section>
 
