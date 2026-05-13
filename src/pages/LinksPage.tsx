@@ -18,7 +18,6 @@ const LinksPage = () => (
         href="https://wa.me/554792838021?text=Vim%20do%20Instagram%2C%20quero%20tirar%20d%C3%BAvidas!"
         target="_blank"
         rel="noopener noreferrer"
-        data-gtm="whatsapp-links-instagram"
         className="flex items-center justify-center gap-3 text-white/70 hover:text-gold transition-colors font-sans text-sm"
       >
         <Phone size={16} />
