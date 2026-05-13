@@ -9,8 +9,21 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import {
-  Plane, Gauge, Paintbrush, Cog, Navigation, ShieldCheck,
-  Armchair, Activity, Wrench, Eye, Fuel, Shield, MessageCircle, CalendarCheck,
+  Activity,
+  ArrowRight,
+  Armchair,
+  CalendarCheck,
+  CheckCircle2,
+  Cog,
+  Eye,
+  Fuel,
+  Gauge,
+  MessageCircle,
+  Navigation,
+  Paintbrush,
+  Plane,
+  ShieldCheck,
+  Wrench,
 } from "lucide-react";
 import {
   WA_BARON_INTERESSE,
@@ -73,61 +86,73 @@ const AeronaveBaronB58 = () => {
   const refContato = useScrollReveal();
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen bg-[#f6f3ec] text-slate-950">
       <Header />
 
       {/* Hero */}
-      <section className="bg-navy navy-texture relative overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={baronSide} alt="" className="w-full h-full object-cover opacity-20" />
-        </div>
-        <div className="container mx-auto px-4 lg:px-8 py-24 lg:py-36 relative z-10">
-          <div className="max-w-3xl animate-fade-in">
-            <div className="gold-line w-20 mb-8" />
-            <h1 className="text-3xl md:text-5xl text-white leading-tight mb-6">
-              Beechcraft Baron B58 | Aeronave executiva com configuração premium
+      <section className="relative min-h-[680px] overflow-hidden bg-slate-950 text-white">
+        <img
+          src={baronSide}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover opacity-25"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,13,12,0.93)_0%,rgba(4,13,12,0.72)_50%,rgba(4,13,12,0.30)_100%)]" />
+        <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:72px_72px]" />
+
+        <div className="relative z-10 container mx-auto px-4 lg:px-8 py-24 lg:py-36">
+          <div className="max-w-3xl">
+            <p className="motion-reveal-up text-sm font-bold uppercase tracking-[0.22em] text-[#d8b66a] mb-4">
+              Aeronave executiva · Configuração premium
+            </p>
+            <h1 className="motion-reveal-up motion-delay-1 text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+              Beechcraft Baron B58
             </h1>
-            <div className="flex flex-wrap gap-4 text-white/70 text-sm font-sans mb-8">
-              <span className="bg-white/10 px-3 py-1 rounded">Ano 1984</span>
-              <span className="bg-white/10 px-3 py-1 rounded">R$ 3.500.000,00</span>
-              <span className="bg-white/10 px-3 py-1 rounded">Pintura nova 2025</span>
-              <span className="bg-white/10 px-3 py-1 rounded">Continental IO550 300 hp</span>
+            <div className="motion-reveal-up motion-delay-2 flex flex-wrap gap-3 mb-10">
+              <span className="bg-white/10 border border-white/15 px-3 py-1.5 rounded-md text-sm text-white/80">Ano 1984</span>
+              <span className="bg-white/10 border border-white/15 px-3 py-1.5 rounded-md text-sm text-white/80">R$ 3.500.000,00</span>
+              <span className="bg-white/10 border border-white/15 px-3 py-1.5 rounded-md text-sm text-white/80">Pintura nova 2025</span>
+              <span className="bg-white/10 border border-white/15 px-3 py-1.5 rounded-md text-sm text-white/80">Continental IO550 300 hp</span>
             </div>
-            <div className="flex flex-wrap gap-4">
+            <div className="motion-reveal-up motion-delay-3 flex flex-wrap gap-4">
               <a
                 href={WA_BARON_INTERESSE}
                 target="_blank"
                 rel="noreferrer"
                 data-gtm="whatsapp-baron-hero-interesse"
-                className="bg-primary text-primary-foreground px-8 py-3.5 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105"
+                className="spotlight-sweep inline-flex items-center gap-2 overflow-hidden rounded-md bg-[#d8b66a] px-6 py-3.5 text-sm font-bold text-slate-950 shadow-xl shadow-black/20 transition hover:-translate-y-1 hover:bg-[#e2c57e]"
               >
                 Quero falar sobre esta aeronave
+                <ArrowRight className="h-4 w-4" />
               </a>
               <a
                 href={WA_BARON_FICHA}
                 target="_blank"
                 rel="noreferrer"
                 data-gtm="whatsapp-baron-hero-ficha"
-                className="border border-white/30 text-white px-8 py-3.5 rounded-md font-semibold font-sans hover:border-gold hover:text-gold transition-all duration-300"
+                className="inline-flex items-center gap-2 rounded-md border border-white/25 bg-white/10 px-6 py-3.5 text-sm font-bold text-white backdrop-blur transition hover:-translate-y-1 hover:bg-white/15"
               >
-                Solicitar ficha técnica completa
+                Solicitar ficha técnica
+                <ArrowRight className="h-4 w-4" />
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Galeria de fotos externas */}
-      <section className="bg-off-white py-16">
+      {/* Galeria */}
+      <section className="py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8">
-          <h2 className="text-2xl md:text-3xl text-foreground mb-8 text-center">Galeria de imagens</h2>
+          <div className="mb-10 text-center">
+            <p className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-800">Fotos</p>
+            <h2 className="mt-3 text-4xl font-bold text-slate-950">Galeria de imagens</h2>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-6xl mx-auto">
             {allImages.map((img, i) => (
               <img
                 key={i}
                 src={img.src}
                 alt={img.alt}
-                className="rounded-xl w-full h-48 object-cover cursor-pointer hover:opacity-90 hover:scale-[1.02] transition-all duration-300"
+                className="rounded-lg w-full h-48 object-cover cursor-pointer hover:opacity-90 hover:scale-[1.02] transition-all duration-300"
                 loading="lazy"
                 onClick={() => setLightboxIndex(i)}
               />
@@ -145,14 +170,21 @@ const AeronaveBaronB58 = () => {
       )}
 
       {/* Resumo técnico */}
-      <section id="resumo" className="bg-card py-20 lg:py-28">
+      <section id="resumo" className="bg-white py-20 lg:py-28">
         <div ref={refSpecs} className="container mx-auto px-4 lg:px-8">
-          <h2 className="text-3xl md:text-4xl text-foreground mb-12 text-center">Resumo técnico</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="mb-10 text-center">
+            <p className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-800">Especificações</p>
+            <h2 className="mt-3 text-4xl font-bold text-slate-950">Resumo técnico</h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-4xl mx-auto">
             {techSpecs.map((s, i) => (
-              <div key={s.label} className="reveal-item bg-muted rounded-xl p-6 text-center hover:shadow-md transition-all duration-300" style={{ transitionDelay: `${i * 80}ms` }}>
-                <p className="text-sm text-muted-foreground font-sans mb-1">{s.label}</p>
-                <p className="font-semibold font-sans text-foreground text-lg">{s.value}</p>
+              <div
+                key={s.label}
+                className="reveal-item bg-[#f6f3ec] rounded-lg border border-slate-200 p-6 text-center hover:shadow-md transition-all duration-300"
+                style={{ transitionDelay: `${i * 80}ms` }}
+              >
+                <p className="text-xs font-bold uppercase tracking-[0.15em] text-slate-400 mb-1">{s.label}</p>
+                <p className="font-bold text-slate-950 text-lg">{s.value}</p>
               </div>
             ))}
           </div>
@@ -160,22 +192,19 @@ const AeronaveBaronB58 = () => {
       </section>
 
       {/* Cockpit */}
-      <section className="bg-off-white py-20 lg:py-28">
-        <div ref={refCockpit} className="container mx-auto px-4 lg:px-8 max-w-6xl reveal-item">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+      <section className="py-20 lg:py-28">
+        <div ref={refCockpit} className="container mx-auto px-4 lg:px-8 max-w-6xl">
+          <div className="reveal-item grid md:grid-cols-2 gap-12 items-center">
             <img
               src={baronCockpit}
               alt="Cockpit da Baron B58"
-              className="rounded-xl w-full h-80 md:h-[420px] object-cover cursor-pointer hover:scale-[1.02] transition-all duration-300"
+              className="rounded-lg w-full h-80 md:h-[420px] object-cover cursor-pointer hover:scale-[1.02] transition-all duration-300 border border-slate-200"
               onClick={() => setLightboxIndex(3)}
             />
             <div>
-              <div className="flex items-center gap-3 mb-4">
-                <Gauge size={28} className="text-primary" />
-                <h2 className="text-2xl md:text-3xl text-foreground">Cockpit completo e funcional</h2>
-              </div>
-              <div className="gold-line w-16 mb-6" />
-              <div className="space-y-4 text-muted-foreground font-sans leading-relaxed">
+              <p className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-800 mb-2">Cockpit</p>
+              <h2 className="text-3xl font-bold text-slate-950 mb-6">Cockpit completo e funcional</h2>
+              <div className="space-y-4 text-slate-600 leading-7 text-sm">
                 <p>O cockpit da Baron B58 é equipado com instrumentação analógica Beechcraft original, complementada por aviônicos modernos integrados — GPS, transponder Modo S e painel de navegação digital.</p>
                 <p>Comandos duplos permitem operação por dois pilotos, ampliando segurança e flexibilidade operacional. A ergonomia do painel facilita a leitura rápida de todos os indicadores de voo.</p>
                 <p>Os manetes de potência e mistura dos dois motores Continental IO550 ficam na posição central, permitindo controle preciso de cada motor independentemente.</p>
@@ -185,9 +214,9 @@ const AeronaveBaronB58 = () => {
                 target="_blank"
                 rel="noreferrer"
                 data-gtm="whatsapp-baron-cockpit"
-                className="inline-flex items-center gap-2 mt-6 bg-primary text-primary-foreground px-6 py-3 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105 text-sm"
+                className="inline-flex items-center gap-2 mt-8 rounded-md bg-emerald-900 px-6 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-emerald-800"
               >
-                <MessageCircle size={16} />
+                <MessageCircle className="h-4 w-4" />
                 Solicitar detalhes do cockpit
               </a>
             </div>
@@ -195,17 +224,14 @@ const AeronaveBaronB58 = () => {
         </div>
       </section>
 
-      {/* Cabine de passageiros */}
-      <section className="bg-card py-20 lg:py-28">
-        <div ref={refCabin} className="container mx-auto px-4 lg:px-8 max-w-6xl reveal-item">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+      {/* Cabine */}
+      <section className="bg-white py-20 lg:py-28">
+        <div ref={refCabin} className="container mx-auto px-4 lg:px-8 max-w-6xl">
+          <div className="reveal-item grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
-              <div className="flex items-center gap-3 mb-4">
-                <Armchair size={28} className="text-primary" />
-                <h2 className="text-2xl md:text-3xl text-foreground">Cabine executiva para até 6 ocupantes</h2>
-              </div>
-              <div className="gold-line w-16 mb-6" />
-              <div className="space-y-4 text-muted-foreground font-sans leading-relaxed">
+              <p className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-800 mb-2">Cabine</p>
+              <h2 className="text-3xl font-bold text-slate-950 mb-6">Cabine executiva para até 6 ocupantes</h2>
+              <div className="space-y-4 text-slate-600 leading-7 text-sm">
                 <p>Interior em couro premium com assentos reclináveis tipo club, dispostos face a face para conforto máximo em viagens executivas. Cada poltrona possui cinto de segurança de 3 pontos.</p>
                 <p>A cabine conta com ar-condicionado, iluminação interna, bagageiro acessível em voo e isolamento acústico que proporciona uma experiência silenciosa e confortável.</p>
                 <p>Ideal para viagens de negócios, traslados familiares ou deslocamentos que exigem privacidade e agilidade operacional.</p>
@@ -215,9 +241,9 @@ const AeronaveBaronB58 = () => {
                 target="_blank"
                 rel="noreferrer"
                 data-gtm="whatsapp-baron-cabine"
-                className="inline-flex items-center gap-2 mt-6 bg-primary text-primary-foreground px-6 py-3 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105 text-sm"
+                className="inline-flex items-center gap-2 mt-8 rounded-md bg-emerald-900 px-6 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-emerald-800"
               >
-                <CalendarCheck size={16} />
+                <CalendarCheck className="h-4 w-4" />
                 Agendar visita à cabine
               </a>
             </div>
@@ -225,13 +251,13 @@ const AeronaveBaronB58 = () => {
               <img
                 src={baronCabin}
                 alt="Cabine de passageiros Baron B58"
-                className="rounded-xl w-full h-52 md:h-64 object-cover cursor-pointer hover:scale-[1.02] transition-all duration-300"
+                className="rounded-lg w-full h-52 md:h-64 object-cover cursor-pointer hover:scale-[1.02] transition-all duration-300"
                 onClick={() => setLightboxIndex(4)}
               />
               <img
                 src={baronCabinRear}
                 alt="Interior traseiro Baron B58"
-                className="rounded-xl w-full h-52 md:h-64 object-cover cursor-pointer hover:scale-[1.02] transition-all duration-300"
+                className="rounded-lg w-full h-52 md:h-64 object-cover cursor-pointer hover:scale-[1.02] transition-all duration-300"
                 onClick={() => setLightboxIndex(5)}
               />
             </div>
@@ -240,32 +266,29 @@ const AeronaveBaronB58 = () => {
       </section>
 
       {/* Instrumentação */}
-      <section className="bg-off-white py-20 lg:py-28">
-        <div ref={refInstruments} className="container mx-auto px-4 lg:px-8 max-w-6xl reveal-item">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+      <section className="py-20 lg:py-28">
+        <div ref={refInstruments} className="container mx-auto px-4 lg:px-8 max-w-6xl">
+          <div className="reveal-item grid md:grid-cols-2 gap-12 items-center">
             <div className="grid grid-cols-2 gap-3">
               <img
                 src={baronPanel}
                 alt="Painel completo Baron B58"
-                className="rounded-xl w-full h-52 md:h-64 object-cover cursor-pointer hover:scale-[1.02] transition-all duration-300"
+                className="rounded-lg w-full h-52 md:h-64 object-cover cursor-pointer hover:scale-[1.02] transition-all duration-300"
                 onClick={() => setLightboxIndex(6)}
               />
               <img
                 src={baronInstruments}
                 alt="Instrumentos do motor Baron B58"
-                className="rounded-xl w-full h-52 md:h-64 object-cover cursor-pointer hover:scale-[1.02] transition-all duration-300"
+                className="rounded-lg w-full h-52 md:h-64 object-cover cursor-pointer hover:scale-[1.02] transition-all duration-300"
                 onClick={() => setLightboxIndex(7)}
               />
             </div>
             <div>
-              <div className="flex items-center gap-3 mb-4">
-                <Activity size={28} className="text-primary" />
-                <h2 className="text-2xl md:text-3xl text-foreground">Instrumentação e monitoramento</h2>
-              </div>
-              <div className="gold-line w-16 mb-6" />
-              <div className="space-y-4 text-muted-foreground font-sans leading-relaxed">
+              <p className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-800 mb-2">Painel</p>
+              <h2 className="text-3xl font-bold text-slate-950 mb-6">Instrumentação e monitoramento</h2>
+              <div className="space-y-4 text-slate-600 leading-7 text-sm">
                 <p>Painel com instrumentos Beechcraft originais para monitoramento completo de ambos os motores: pressão de admissão (MAP), RPM, fluxo de combustível (fuel flow), temperatura de cabeça de cilindro (CHT) e temperatura de gases de escape (EGT).</p>
-                <p>O monitoramento duplo — lado esquerdo e direito — garante que o piloto acompanhe em tempo real a performance individual de cada motor Continental IO550, facilitando a detecção precoce de qualquer anomalia.</p>
+                <p>O monitoramento duplo garante que o piloto acompanhe em tempo real a performance individual de cada motor Continental IO550, facilitando a detecção precoce de qualquer anomalia.</p>
                 <p>Indicadores de pressão e temperatura de óleo completam o painel, proporcionando visibilidade total da saúde mecânica da aeronave.</p>
               </div>
             </div>
@@ -273,29 +296,32 @@ const AeronaveBaronB58 = () => {
         </div>
       </section>
 
-      {/* Motorização e hélices */}
-      <section className="bg-card py-20 lg:py-28">
-        <div ref={refMotors} className="container mx-auto px-4 lg:px-8 max-w-4xl reveal-item">
-          <h2 className="text-3xl md:text-4xl text-foreground mb-12 text-center">Motorização e hélices</h2>
-          <div className="grid md:grid-cols-2 gap-8">
+      {/* Motorização */}
+      <section className="bg-white py-20 lg:py-28">
+        <div ref={refMotors} className="container mx-auto px-4 lg:px-8 max-w-4xl">
+          <div className="mb-10 text-center">
+            <p className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-800">Propulsão</p>
+            <h2 className="mt-3 text-4xl font-bold text-slate-950">Motorização e hélices</h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
             {[
               { side: "Lado esquerdo", motor: "40 h desde overhaul", helice: "0 h desde overhaul" },
               { side: "Lado direito", motor: "1.116 h desde overhaul", helice: "0 h desde overhaul" },
             ].map((s) => (
-              <div key={s.side} className="bg-muted rounded-xl border border-border p-8">
-                <h3 className="font-sans font-semibold text-foreground text-lg mb-6 flex items-center gap-2">
-                  <Cog size={20} className="text-primary" /> {s.side}
+              <div key={s.side} className="reveal-item bg-[#f6f3ec] rounded-lg border border-slate-200 p-8">
+                <h3 className="font-bold text-slate-950 text-lg mb-6 flex items-center gap-2">
+                  <Cog className="h-5 w-5 text-emerald-800" /> {s.side}
                 </h3>
-                <div className="space-y-4">
-                  <div className="bg-card rounded-lg p-4">
-                    <p className="text-sm text-muted-foreground font-sans">Motor</p>
-                    <p className="font-sans font-semibold text-foreground">Continental IO550 300 hp</p>
-                    <p className="text-sm text-primary font-sans">{s.motor}</p>
+                <div className="space-y-3">
+                  <div className="bg-white rounded-lg border border-slate-200 p-4">
+                    <p className="text-xs font-bold uppercase tracking-[0.15em] text-slate-400 mb-1">Motor</p>
+                    <p className="font-bold text-slate-950">Continental IO550 300 hp</p>
+                    <p className="text-sm text-emerald-800 font-semibold mt-1">{s.motor}</p>
                   </div>
-                  <div className="bg-card rounded-lg p-4">
-                    <p className="text-sm text-muted-foreground font-sans">Hélice</p>
-                    <p className="font-sans font-semibold text-foreground">Tri-pá</p>
-                    <p className="text-sm text-primary font-sans">{s.helice}</p>
+                  <div className="bg-white rounded-lg border border-slate-200 p-4">
+                    <p className="text-xs font-bold uppercase tracking-[0.15em] text-slate-400 mb-1">Hélice</p>
+                    <p className="font-bold text-slate-950">Tri-pá</p>
+                    <p className="text-sm text-emerald-800 font-semibold mt-1">{s.helice}</p>
                   </div>
                 </div>
               </div>
@@ -305,10 +331,13 @@ const AeronaveBaronB58 = () => {
       </section>
 
       {/* Aviônicos */}
-      <section className="bg-off-white py-20 lg:py-28">
+      <section className="py-20 lg:py-28">
         <div ref={refAvionics} className="container mx-auto px-4 lg:px-8 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl text-foreground mb-12 text-center">Aviônicos e equipamentos</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mb-10 text-center">
+            <p className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-800">Equipamentos</p>
+            <h2 className="mt-3 text-4xl font-bold text-slate-950">Aviônicos e equipamentos</h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
               { icon: Navigation, title: "Navegação", items: ["GPS integrado", "VOR/ILS", "ADF"] },
               { icon: ShieldCheck, title: "Segurança", items: ["Transponder Modo S", "ELT"] },
@@ -316,13 +345,17 @@ const AeronaveBaronB58 = () => {
               { icon: Activity, title: "Monitoramento", items: ["Engine monitor", "Fuel flow"] },
               { icon: Wrench, title: "Acessórios", items: ["Lista completa sob consulta"] },
             ].map((group, gi) => (
-              <div key={group.title} className="reveal-item bg-card rounded-xl p-6 hover:shadow-md transition-all duration-300 border border-border" style={{ transitionDelay: `${gi * 100}ms` }}>
-                <group.icon size={24} className="text-primary mb-3" />
-                <h3 className="font-sans font-semibold text-foreground mb-3">{group.title}</h3>
+              <div
+                key={group.title}
+                className="reveal-item bg-white rounded-lg border border-slate-200 p-6 hover:shadow-md transition-all duration-300"
+                style={{ transitionDelay: `${gi * 100}ms` }}
+              >
+                <group.icon className="h-6 w-6 text-emerald-800 mb-3" />
+                <h3 className="font-bold text-slate-950 mb-3">{group.title}</h3>
                 <ul className="space-y-1.5">
-                  {group.items.map((item, i) => (
-                    <li key={i} className="text-sm text-muted-foreground font-sans flex items-start gap-2">
-                      <span className="text-gold mt-1">•</span> {item}
+                  {group.items.map((item) => (
+                    <li key={item} className="text-sm text-slate-600 flex items-start gap-2">
+                      <span className="text-[#d8b66a] mt-1">•</span> {item}
                     </li>
                   ))}
                 </ul>
@@ -332,61 +365,92 @@ const AeronaveBaronB58 = () => {
         </div>
       </section>
 
-      {/* Condição + Segurança documental */}
-      <section className="bg-navy navy-texture py-20 lg:py-28">
+      {/* Condição + Documentação — dark */}
+      <section className="bg-slate-950 py-20 lg:py-28">
         <div ref={refCondition} className="container mx-auto px-4 lg:px-8 max-w-3xl text-center reveal-item">
-          <Paintbrush size={48} className="text-gold mx-auto mb-6" />
-          <h2 className="text-3xl md:text-4xl text-white mb-6">Condição, documentação e visitação</h2>
-          <div className="gold-line w-16 mx-auto mb-8" />
-          <div className="space-y-4 text-white/70 font-sans leading-relaxed">
-            <p>Pintura nova em 2025 com excelente apresentação. Cabine confortável para até 6 ocupantes, ideal para uso executivo.</p>
-            <p>Documentação, histórico de manutenção e registros são apresentados sob atendimento consultivo. Inspeção e visita técnica podem ser agendadas com antecedência.</p>
+          <Paintbrush className="h-12 w-12 text-[#d8b66a] mx-auto mb-6" />
+          <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#d8b66a] mb-4">Condição</p>
+          <h2 className="text-4xl font-bold text-white mb-6">Condição, documentação e visitação</h2>
+          <div className="grid gap-3 sm:grid-cols-2 mb-8 text-left max-w-md mx-auto">
+            {["Pintura nova 2025", "Documentação completa", "Inspeção agendável", "Histórico de manutenção"].map((item) => (
+              <div key={item} className="flex items-center gap-2 text-sm font-semibold text-white/80">
+                <CheckCircle2 className="h-4 w-4 text-[#d8b66a] shrink-0" />
+                {item}
+              </div>
+            ))}
           </div>
+          <p className="text-white/60 leading-7 mb-10 max-w-xl mx-auto text-sm">
+            Pintura nova em 2025 com excelente apresentação. Cabine confortável para até 6 ocupantes, ideal para uso executivo.
+            Documentação, histórico de manutenção e registros são apresentados sob atendimento consultivo.
+          </p>
           <a
             href={WA_BARON_INSPECAO}
             target="_blank"
             rel="noreferrer"
             data-gtm="whatsapp-baron-inspecao"
-            className="inline-flex items-center gap-2 mt-8 bg-primary text-primary-foreground px-8 py-3.5 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105"
+            className="spotlight-sweep inline-flex items-center gap-2 overflow-hidden rounded-md bg-[#d8b66a] px-8 py-3.5 text-sm font-bold text-slate-950 shadow-xl shadow-black/20 transition hover:-translate-y-1 hover:bg-[#e2c57e]"
           >
-            <CalendarCheck size={18} />
+            <CalendarCheck className="h-4 w-4" />
             Agendar inspeção
+            <ArrowRight className="h-4 w-4" />
           </a>
         </div>
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="bg-card py-20 lg:py-28">
-        <div ref={refFaq} className="container mx-auto px-4 lg:px-8 max-w-3xl reveal-item">
-          <h2 className="text-3xl md:text-4xl text-foreground mb-12 text-center">Perguntas Frequentes</h2>
-          <Accordion type="single" collapsible className="space-y-3">
+      <section id="faq" className="bg-white py-20 lg:py-28">
+        <div ref={refFaq} className="container mx-auto grid gap-10 px-4 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
+          <div className="reveal-item">
+            <p className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-800">FAQ</p>
+            <h2 className="mt-3 text-4xl font-bold text-slate-950">Perguntas frequentes sobre a aeronave.</h2>
+          </div>
+          <Accordion type="single" collapsible className="reveal-item space-y-3">
             {faqItems.map((f, i) => (
-              <AccordionItem key={i} value={`faq-${i}`} className="bg-background rounded-lg border border-border px-6">
-                <AccordionTrigger className="text-left font-sans font-medium text-foreground hover:text-primary">{f.q}</AccordionTrigger>
-                <AccordionContent className="text-muted-foreground font-sans text-sm leading-relaxed">{f.a}</AccordionContent>
+              <AccordionItem
+                key={i}
+                value={`faq-${i}`}
+                className="rounded-lg border border-slate-200 px-5 bg-[#f6f3ec]"
+              >
+                <AccordionTrigger className="text-left text-base font-bold text-slate-900 hover:text-emerald-800">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-sm leading-7 text-slate-600">{f.a}</AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
         </div>
       </section>
 
-      {/* Contato direto — WhatsApp */}
-      <section id="contato" className="bg-off-white py-20 lg:py-28 border-t border-border">
-        <div ref={refContato} className="container mx-auto px-4 lg:px-8 max-w-2xl reveal-item text-center">
-          <Plane size={40} className="text-primary mx-auto mb-6" />
-          <h2 className="text-3xl md:text-4xl text-foreground mb-4">Fale com um consultor especializado</h2>
-          <p className="text-muted-foreground mb-10 font-sans max-w-lg mx-auto">
-            Inicie a conversa pelo WhatsApp. A equipe ATHS apresenta a ficha técnica completa e organiza a inspeção da Baron B58.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      {/* Contato direto */}
+      <section id="contato" className="py-20 lg:py-28">
+        <div ref={refContato} className="container mx-auto grid gap-10 px-4 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+          <div className="reveal-item overflow-hidden rounded-lg bg-slate-950 text-white">
+            <img src={baronAngle} alt="Beechcraft Baron B58" className="h-64 w-full object-cover opacity-80" />
+            <div className="p-8">
+              <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#d8b66a]">Contato direto</p>
+              <h2 className="mt-3 text-3xl font-bold">Fale com um consultor especializado.</h2>
+              <p className="mt-4 text-sm leading-7 text-white/70">
+                A equipe ATHS apresenta a ficha técnica completa e organiza a inspeção da Baron B58.
+              </p>
+            </div>
+          </div>
+
+          <div className="reveal-item flex flex-col justify-center gap-4 rounded-lg border border-slate-200 bg-white p-8 shadow-xl shadow-slate-950/5">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-emerald-800">Atendimento direto</p>
+              <h3 className="mt-3 text-2xl font-bold text-slate-950">Inicie a conversa</h3>
+              <p className="mt-3 text-sm leading-7 text-slate-600">
+                Escolha como prefere começar — solicite a ficha técnica ou inicie a conversa com o consultor.
+              </p>
+            </div>
             <a
               href={WA_BARON_INTERESSE}
               target="_blank"
               rel="noreferrer"
               data-gtm="whatsapp-baron-cta-interesse"
-              className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-md font-semibold font-sans hover:bg-primary/90 transition-all duration-300 hover:scale-105 text-sm"
+              className="flex items-center justify-center gap-2 w-full rounded-md bg-emerald-900 px-6 py-3.5 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-emerald-800"
             >
-              <MessageCircle size={18} />
+              <MessageCircle className="h-4 w-4" />
               Quero falar sobre esta aeronave
             </a>
             <a
@@ -394,9 +458,9 @@ const AeronaveBaronB58 = () => {
               target="_blank"
               rel="noreferrer"
               data-gtm="whatsapp-baron-cta-ficha"
-              className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-md font-semibold font-sans hover:border-primary hover:text-primary transition-all duration-300 text-sm"
+              className="flex items-center justify-center gap-2 w-full rounded-md border border-slate-200 bg-[#f6f3ec] px-6 py-3.5 text-sm font-semibold text-slate-800 transition hover:border-emerald-800/40 hover:bg-emerald-50 hover:text-emerald-900"
             >
-              <Eye size={18} />
+              <Eye className="h-4 w-4" />
               Solicitar ficha técnica
             </a>
           </div>

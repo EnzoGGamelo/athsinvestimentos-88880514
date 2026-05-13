@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, MessageCircle, X } from "lucide-react";
 
 import logo from "@/assets/aths-logo.png";
+import { WA_GERAL } from "@/lib/whatsapp";
 
 const navItems = [
   { label: "ATHS", path: "/" },
@@ -42,7 +43,9 @@ const Header = () => {
           </nav>
 
           <a
-            href="/#formulario"
+            href={WA_GERAL}
+            target="_blank"
+            rel="noreferrer"
             className="hidden items-center gap-2 rounded-md bg-[#d8b66a] px-4 py-2.5 text-sm font-bold text-slate-950 transition hover:-translate-y-0.5 hover:bg-[#e2c57e] lg:inline-flex"
           >
             <MessageCircle className="h-4 w-4" />
@@ -81,7 +84,9 @@ const Header = () => {
               );
             })}
             <a
-              href="/#formulario"
+              href={WA_GERAL}
+              target="_blank"
+              rel="noreferrer"
               onClick={() => setOpen(false)}
               className="mt-2 flex items-center justify-center gap-2 rounded-md bg-[#d8b66a] px-4 py-3 text-sm font-bold text-slate-950"
             >

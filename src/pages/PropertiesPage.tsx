@@ -1,9 +1,10 @@
 import { useMemo, useState } from "react";
-import { MapPin, MessageCircle, Ruler, Search } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight, MapPin, Ruler, Search } from "lucide-react";
 
+import FloatingCTA from "@/components/FloatingCTA";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
@@ -13,153 +14,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { imoveis, filtrosTipo, formatarPreco, type TipoImovel, type Imovel } from "@/data/imoveis";
 
-type TipoImovel = "Lote" | "Casa" | "Comercial" | "Fazenda" | "Terreno";
-
-interface Imovel {
-  id: string;
-  tipo: TipoImovel;
-  titulo: string;
-  localizacao: string;
-  preco: number | "Sob Consulta";
-  area: string;
-  descricao: string;
-  linkMapa?: string;
-  imagens: string[];
-}
-
-const filtrosTipo: Array<TipoImovel | "Todos"> = ["Todos", "Lote", "Casa", "Comercial", "Fazenda"];
-const WHATSAPP_NUMBER = "554792838021";
-
-const imagensCasaSaoJose = [
-  20,
-  22,
-  ...Array.from({ length: 19 }, (_, index) => index + 1),
-  21,
-].map((numero) => `/Casa%20S%C3%A3o%20Jos%C3%A9%20SC/Casa%20de%20S%C3%A3o%20Jos%C3%A9%20(${numero}).jpeg`);
-
-const imagensLoteamentoTresPalmeiras = [1, 9, 5, 2, 3, 4, 6, 7, 8, 10, 11].map(
-  (numero) => `/15%20de%20Novembro%20RS/Quinze%20de%20Novembro%20-%2013%20lotes%20(${numero}).jpeg`,
-);
-
-const imagensFazendaJurema = [2, 3, 1].map(
-  (numero) => `/Fazenda%20Jurema/fazenda%20jurema%20(${numero}).jpeg`,
-);
-
-const imagensLoteamentoBage = [
-  "/Bag%C3%A9%20Loteamento/Bag%C3%A9%20Loteamento.jpeg",
-  "/Bag%C3%A9%20Loteamento/Bag%C3%A9%20Loteamento%20(2).jpeg",
-];
-
-const imoveis: Imovel[] = [
-  {
-    id: "lotes-anhembi",
-    tipo: "Lote",
-    titulo: "3 Lotes Anhembi",
-    localizacao: "Jd. Cruzeiro, Anhembi - SP",
-    preco: 80000,
-    area: "300m² cada lote",
-    descricao:
-      "Lotes de 300m² em bairro residencial, com escolas, supermercados e posto a menos de 1km. Oportunidade para construção residencial em região consolidada.",
-    linkMapa: "https://goo.gl/maps/mBCAdLK2AfEpLSiGA",
-    imagens: [],
-  },
-  {
-    id: "casa-sao-jose",
-    tipo: "Casa",
-    titulo: "Casa de São José",
-    localizacao: "Rua Portimão, LT23 QD21, Forquilhas, São José - SC",
-    preco: 500000,
-    area: "Terreno de 200m²",
-    descricao:
-      "Terreno com 200m² possuindo 3 quartos, sendo 1 suíte, sala, cozinha, banheiro social, garagem para 2 carros e edícula nos fundos.",
-    linkMapa: "https://goo.gl/maps/U8opH6yb4sALZ9E4A",
-    imagens: imagensCasaSaoJose,
-  },
-  {
-    id: "loteamento-tres-palmeiras",
-    tipo: "Lote",
-    titulo: "Loteamento Bairro Três Palmeiras",
-    localizacao: "Quinze de Novembro - RS",
-    preco: 1400000,
-    area: "2.499,97m² ou 26 lotes",
-    descricao:
-      "Opção 1: área de 2.499,97m² dividida em 13 lotes, com média de 190m² cada, por R$ 1.400.000,00. Opção 2: dois terrenos totalizando 26 lotes por R$ 2.800.000,00.",
-    linkMapa: "https://maps.app.goo.gl/QS5hT8ga43bdZMcK6",
-    imagens: imagensLoteamentoTresPalmeiras,
-  },
-  {
-    id: "terreno-anhanguera",
-    tipo: "Terreno",
-    titulo: "Terreno Rodovia Anhanguera",
-    localizacao: "Pirassununga - SP",
-    preco: 16835362,
-    area: "84.176,81m²",
-    descricao:
-      "Área total de 84.176,81m² na margem da SP 330, km 206. Aprovado para construção de 3 barracões, totalizando 31.700,00m², com potencial comercial e para condomínios.",
-    linkMapa: "https://maps.app.goo.gl/eEgVPXo6wmfKSYWr6",
-    imagens: [],
-  },
-  {
-    id: "sala-san-pietro",
-    tipo: "Comercial",
-    titulo: "Sala San Pietro",
-    localizacao: "Pioneiros, Balneário Camboriú - SC",
-    preco: 550000,
-    area: "37,29m² + vaga de 12,50m²",
-    descricao:
-      "Sala comercial no 4º andar, com 37,29m² privativos e vaga de garagem de 12,50m². Localização próxima ao Hospital do Coração.",
-    imagens: [],
-  },
-  {
-    id: "fazenda-jurema",
-    tipo: "Fazenda",
-    titulo: "Fazenda Jurema",
-    localizacao: "Brasil",
-    preco: "Sob Consulta",
-    area: "Propriedade rural",
-    descricao:
-      "Propriedade rural com pista de pouso de terra, casa com varanda e amplo galpão coberto contendo maquinário pesado.",
-    imagens: imagensFazendaJurema,
-  },
-  {
-    id: "loteamento-bage",
-    tipo: "Lote",
-    titulo: "Loteamento Bagé",
-    localizacao: "Bagé - RS",
-    preco: "Sob Consulta",
-    area: "Ampla área aberta",
-    descricao:
-      'Ampla área aberta com gramado e árvores. Contém uma casa branca e placa "Vende ou Permuta" com projeto de construção.',
-    imagens: imagensLoteamentoBage,
-  },
-];
-
-const formatarPreco = (preco: Imovel["preco"]) => {
-  if (preco === "Sob Consulta") {
-    return preco;
-  }
-
-  return new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-    maximumFractionDigits: 2,
-  }).format(preco);
-};
-
-const criarWhatsAppUrl = (imovel: Imovel) => {
-  const message = [
-    "Olá, vim do site da ATHS e tenho interesse neste imóvel:",
-    "",
-    `Imóvel: ${imovel.titulo}`,
-    `Tipo: ${imovel.tipo}`,
-    `Localização: ${imovel.localizacao}`,
-    `Área: ${imovel.area}`,
-    `Preço: ${formatarPreco(imovel.preco)}`,
-  ].join("\n");
-
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-};
+const normalizarTexto = (texto: string) =>
+  texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "");
 
 const PropertyImage = ({ imovel }: { imovel: Imovel }) => {
   const imagemCapa = imovel.imagens[0];
@@ -167,8 +28,8 @@ const PropertyImage = ({ imovel }: { imovel: Imovel }) => {
   if (!imagemCapa) {
     return (
       <div className="flex h-full w-full flex-col justify-end bg-[linear-gradient(135deg,#0f1f24_0%,#135b4b_58%,#d8b66a_140%)] p-5 text-white">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#d8b66a]">{imovel.tipo}</p>
-        <p className="mt-2 font-serif text-2xl font-bold leading-tight">{imovel.titulo}</p>
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#d8b66a]">{imovel.tipo}</p>
+        <p className="mt-2 text-2xl font-bold leading-tight">{imovel.titulo}</p>
       </div>
     );
   }
@@ -181,12 +42,6 @@ const PropertyImage = ({ imovel }: { imovel: Imovel }) => {
     />
   );
 };
-
-const normalizarTexto = (texto: string) =>
-  texto
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
 
 const PropertiesPage = () => {
   const [busca, setBusca] = useState("");
@@ -210,22 +65,25 @@ const PropertiesPage = () => {
       <Header />
 
       <main id="inicio">
+        {/* Hero */}
         <section className="relative overflow-hidden bg-slate-950 text-white">
           <img
             src="/15%20de%20Novembro%20RS/Quinze%20de%20Novembro%20-%2013%20lotes%20(1).jpeg"
             alt="Loteamento ATHS"
-            className="absolute inset-0 h-full w-full object-cover opacity-40"
+            className="absolute inset-0 h-full w-full object-cover opacity-35"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,16,20,0.94)_0%,rgba(7,16,20,0.74)_58%,rgba(7,16,20,0.28)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,13,12,0.94)_0%,rgba(4,13,12,0.74)_58%,rgba(4,13,12,0.28)_100%)]" />
+          <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:72px_72px]" />
+
           <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-24">
             <div className="flex flex-col justify-center">
-              <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-[#d8b66a]">
+              <p className="motion-reveal-up mb-4 text-sm font-bold uppercase tracking-[0.22em] text-[#d8b66a]">
                 Portfólio selecionado
               </p>
-              <h1 className="max-w-3xl font-serif text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+              <h1 className="motion-reveal-up motion-delay-1 max-w-3xl text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
                 Encontre o imóvel ideal na ATHS
               </h1>
-              <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
+              <p className="motion-reveal-up motion-delay-2 mt-6 max-w-2xl text-base leading-7 text-white/75 sm:text-lg">
                 Explore terrenos, casas, salas comerciais e propriedades rurais com informações organizadas para uma
                 avaliação rápida e objetiva.
               </p>
@@ -263,11 +121,12 @@ const PropertiesPage = () => {
           </div>
         </section>
 
+        {/* Listing */}
         <section id="imoveis" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
           <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-emerald-900">Imóveis ATHS</p>
-              <h2 className="mt-2 font-serif text-3xl font-bold text-slate-950">Listagem de oportunidades</h2>
+              <h2 className="mt-2 text-3xl font-bold text-slate-950">Listagem de oportunidades</h2>
             </div>
             <p className="text-sm text-slate-600">
               {imoveisFiltrados.length} {imoveisFiltrados.length === 1 ? "resultado" : "resultados"}
@@ -286,7 +145,7 @@ const PropertiesPage = () => {
                     {imovel.tipo}
                   </span>
                 </div>
-                <CardContent className="flex min-h-[260px] flex-col p-5">
+                <CardContent className="flex min-h-[240px] flex-col p-5">
                   <h3 className="text-xl font-bold leading-snug text-slate-950">{imovel.titulo}</h3>
                   <div className="mt-3 flex items-start gap-2 text-sm text-slate-600">
                     <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-emerald-900" />
@@ -296,18 +155,14 @@ const PropertiesPage = () => {
                     <Ruler className="h-4 w-4 text-emerald-900" />
                     <span>{imovel.area}</span>
                   </div>
-                  <p className="mt-5 text-lg font-bold text-slate-950">{formatarPreco(imovel.preco)}</p>
-                  <Button asChild className="mt-auto w-full bg-emerald-900 hover:bg-emerald-800">
-                    <a
-                      href={criarWhatsAppUrl(imovel)}
-                      target="_blank"
-                      rel="noreferrer"
-                      data-gtm={`whatsapp-imovel-${imovel.id}`}
-                    >
-                      <MessageCircle className="h-4 w-4" />
-                      Falar no WhatsApp
-                    </a>
-                  </Button>
+                  <p className="mt-4 text-lg font-bold text-slate-950">{formatarPreco(imovel.preco)}</p>
+                  <Link
+                    to={imovel.urlPath}
+                    className="mt-auto flex w-full items-center justify-center gap-2 rounded-md bg-emerald-900 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-emerald-800"
+                  >
+                    Ver imóvel
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </CardContent>
               </Card>
             ))}
@@ -321,6 +176,7 @@ const PropertiesPage = () => {
         </section>
       </main>
 
+      <FloatingCTA />
       <Footer />
     </div>
   );

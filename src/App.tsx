@@ -8,6 +8,7 @@ import FazendaJurema from "./pages/FazendaJurema.tsx";
 import AeronaveBaronB58 from "./pages/AeronaveBaronB58.tsx";
 import LinksPage from "./pages/LinksPage.tsx";
 import PropertiesPage from "./pages/PropertiesPage.tsx";
+import ImovelDetailPage from "./pages/ImovelDetailPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,8 @@ const App = () => (
           <Route path="/fazenda-jurema" element={<FazendaJurema />} />
           <Route path="/aeronave-baronb58" element={<AeronaveBaronB58 />} />
           <Route path="/imoveis" element={<PropertiesPage />} />
+          <Route path="/imovel/:slug" element={<ImovelDetailPage />} />
+          <Route path="/terreno/:slug" element={<ImovelDetailPage />} />
           <Route path="/links" element={<LinksPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
