@@ -68,7 +68,7 @@ const PropertiesPage = () => {
         {/* Hero */}
         <section className="relative overflow-hidden bg-slate-950 text-white">
           <img
-            src="/15%20de%20Novembro%20RS/Quinze%20de%20Novembro%20-%2013%20lotes%20(1).jpeg"
+            src="/tres-palmeiras/foto-1.jpeg"
             alt="Loteamento ATHS"
             className="absolute inset-0 h-full w-full object-cover opacity-35"
           />

@@ -44,17 +44,17 @@ const heroAssets = [
   {
     label: "Fazenda Jurema",
     meta: "Rural com estrutura",
-    image: "/Fazenda%20Jurema/fazenda%20jurema%20(2).jpeg",
+    image: "/fazenda-jurema/foto-2.jpeg",
   },
   {
     label: "Loteamento Três Palmeiras",
     meta: "Terrenos no RS",
-    image: "/15%20de%20Novembro%20RS/Quinze%20de%20Novembro%20-%2013%20lotes%20(1).jpeg",
+    image: "/tres-palmeiras/foto-1.jpeg",
   },
   {
     label: "Casa São José",
     meta: "Residencial em SC",
-    image: "/Casa%20S%C3%A3o%20Jos%C3%A9%20SC/Casa%20de%20S%C3%A3o%20Jos%C3%A9%20(20).jpeg",
+    image: "/casa-sao-jose/foto-20.jpeg",
   },
 ];
 
@@ -99,7 +99,7 @@ const featured = [
     label: "Casas, lotes e áreas",
     desc: "Listagem dinâmica de imóveis ATHS com filtros e galeria.",
     href: "/imoveis",
-    image: "/15%20de%20Novembro%20RS/Quinze%20de%20Novembro%20-%2013%20lotes%20(1).jpeg",
+    image: "/tres-palmeiras/foto-1.jpeg",
   },
 ];
 

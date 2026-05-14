@@ -15,24 +15,21 @@ export interface Imovel {
 
 export const filtrosTipo: Array<TipoImovel | "Todos"> = ["Todos", "Lote", "Casa", "Comercial", "Fazenda", "Terreno"];
 
-const imagensCasaSaoJose = [
-  20,
-  22,
-  ...Array.from({ length: 19 }, (_, index) => index + 1),
-  21,
-].map((numero) => `/Casa%20S%C3%A3o%20Jos%C3%A9%20SC/Casa%20de%20S%C3%A3o%20Jos%C3%A9%20(${numero}).jpeg`);
+const imagensCasaSaoJose = [20, 22, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21].map(
+  (numero) => `/casa-sao-jose/foto-${numero}.jpeg`,
+);
 
 const imagensLoteamentoTresPalmeiras = [1, 9, 5, 2, 3, 4, 6, 7, 8, 10, 11].map(
-  (numero) => `/15%20de%20Novembro%20RS/Quinze%20de%20Novembro%20-%2013%20lotes%20(${numero}).jpeg`,
+  (numero) => `/tres-palmeiras/foto-${numero}.jpeg`,
 );
 
 const imagensFazendaJurema = [2, 3, 1].map(
-  (numero) => `/Fazenda%20Jurema/fazenda%20jurema%20(${numero}).jpeg`,
+  (numero) => `/fazenda-jurema/foto-${numero}.jpeg`,
 );
 
 const imagensLoteamentoBage = [
-  "/Bag%C3%A9%20Loteamento/Bag%C3%A9%20Loteamento.jpeg",
-  "/Bag%C3%A9%20Loteamento/Bag%C3%A9%20Loteamento%20(2).jpeg",
+  "/bage-loteamento/foto-1.jpeg",
+  "/bage-loteamento/foto-2.jpeg",
 ];
 
 export const imoveis: Imovel[] = [
