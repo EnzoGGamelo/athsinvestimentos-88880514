@@ -99,7 +99,7 @@ export const imoveis: Imovel[] = [
     area: "37,29m² + vaga de 12,50m²",
     descricao:
       "Sala comercial no 4º andar, com 37,29m² privativos e vaga de garagem de 12,50m². Localização próxima ao Hospital do Coração.",
-    imagens: [],
+    imagens: imagensSalaSanPietro,
   },
   {
     id: "fazenda-jurema",
