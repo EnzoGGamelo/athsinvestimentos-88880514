@@ -32,6 +32,10 @@ const imagensLoteamentoBage = [
   "/bage-loteamento/foto-2.jpeg",
 ];
 
+const imagensSalaSanPietro = [1, 2, 3, 4, 5, 6, 7, 8].map(
+  (numero) => `/sala-san-pietro/foto-${numero}.jpeg`,
+);
+
 export const imoveis: Imovel[] = [
   {
     id: "lotes-anhembi",
