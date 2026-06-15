@@ -87,7 +87,7 @@ export const imoveis: Imovel[] = [
     descricao:
       "Área total de 84.176,81m² na margem da SP 330, km 206. Aprovado para construção de 3 barracões, totalizando 31.700,00m², com potencial comercial e para condomínios.",
     linkMapa: "https://maps.app.goo.gl/eEgVPXo6wmfKSYWr6",
-    imagens: [],
+    imagens: imagensSalaSanPietro,
   },
   {
     id: "sala-san-pietro",
