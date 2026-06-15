@@ -32,6 +32,10 @@ const imagensLoteamentoBage = [
   "/bage-loteamento/foto-2.jpeg",
 ];
 
+const imagensSalaSanPietro = [1, 2, 3, 4, 5, 6, 7, 8].map(
+  (numero) => `/sala-san-pietro/foto-${numero}.jpeg`,
+);
+
 export const imoveis: Imovel[] = [
   {
     id: "lotes-anhembi",
@@ -95,7 +99,7 @@ export const imoveis: Imovel[] = [
     area: "37,29m² + vaga de 12,50m²",
     descricao:
       "Sala comercial no 4º andar, com 37,29m² privativos e vaga de garagem de 12,50m². Localização próxima ao Hospital do Coração.",
-    imagens: [],
+    imagens: imagensSalaSanPietro,
   },
   {
     id: "fazenda-jurema",
